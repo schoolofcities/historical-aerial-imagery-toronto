@@ -30,14 +30,3 @@ Mapbox has a pretty straightforward method for creating comparable maps, we just
 
 5. Use Mapbox GL JS (https://docs.mapbox.com/mapbox-gl-js/) to create a web map that shows two maps with a slider that allows for dragging and comparing between them. (https://docs.mapbox.com/mapbox-gl-js/example/mapbox-gl-compare/). The map should have options for selecting a year (for each side) and toggling labels to the map.
 
-
-
-
-
-
-
-
-
-
-
-
