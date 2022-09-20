@@ -1,7 +1,9 @@
 <script>
-	import { onMount } from 'svelte'
+	import { onMount } from 'svelte';
 
-	import Top from "./lib/Top.svelte"
+	import L from 'leaflet';
+
+	import Top from "./lib/Top.svelte";
 
 	// mapboxgl.accessToken = 'pk.eyJ1Ijoic2Nob29sb2ZjaXRpZXMiLCJhIjoiY2w3aml0dHdlMHlpazNwbWh0em4xOHNlaCJ9.fXNtPGq0DqYiFvPH6p4fjQ';
 
@@ -12,18 +14,13 @@
 
 	// let pageWidth;
 	
-	// onMount(() => {
-	// 	map = new mapboxgl.Map({
-	// 		container: 'map', 
-	// 		style: 'mapbox://styles/schoolofcities/cl7j75gbd003b14ocub8skc7c',
-	// 		center: [-79.45, 43.65], 
-	// 		zoom: 10,
-	// 		maxZoom: 12,
-	// 		minZoom: 5,
-	// 		projection: 'globe',
-	// 		scrollZoom: true,
-	// 		attributionControl: false
-	// 	});
+	onMount(() => {
+		var map = L.map('map').setView([51.505, -0.09], 13);
+
+		L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+			attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+		}).addTo(map);
+	})
 		
 		
 	// 	map.addControl(new mapboxgl.AttributionControl({
@@ -81,6 +78,9 @@
 </script>
 
 <svelte:head>
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
+	integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
+	crossorigin=""/>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
 	<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
@@ -89,12 +89,17 @@
 
 
 
-<Top/>
 
 
 
 
 
+<main>
+	<Top/>
+
+	<div id="map"></div>
+
+</main>
 
 
 
@@ -117,7 +122,21 @@
 		font-family: 'Roboto', sans-serif;
 	}
 
+	main {
+		margin: auto;
+		width: 100%;
+		/* margin-bottom: -15px; */
+	}
 
+	#map {
+		/* margin-top: 50px; */
+		height: 100%;
+		width: 100%;
+		top: 0;
+        left: 0;
+		position: absolute;
+		z-index: -99;
+	}
 	
 	
 </style>
