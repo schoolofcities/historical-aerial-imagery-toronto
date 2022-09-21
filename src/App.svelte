@@ -13,13 +13,18 @@
 	import {getWidth} from 'ol/extent';
 
 	let lineBreak = 50;
+	let pageWidth = 420;
 
-	$: console.log(lineBreak)
+	$: lineLeft = parseInt(pageWidth * (lineBreak / 100));
+
+	$: console.log(lineLeft);
+
 
 	onMount(() => {
 
 		useGeographic();
 
+		lineBreak = 50;
 
 		const resolutions = [];
 		const matrixIds = [];
@@ -85,7 +90,7 @@
 		t2021.on('prerender', function (event) {
 			const ctx = event.context;
 			const mapSize = map.getSize();
-			const width = mapSize[0] * (swipe.value / 100);
+			const width = mapSize[0] * (lineBreak / 100);
 			const tl = getRenderPixel(event, [width, 0]);
 			const tr = getRenderPixel(event, [mapSize[0], 0]);
 			const bl = getRenderPixel(event, [width, mapSize[1]]);
@@ -132,9 +137,9 @@
 
 	<input id="swipe" type="range" bind:value={lineBreak} style="width: 100%">
 
-	<div id="line"></div>
+	<div id="line" style="left: {lineLeft}px;"></div>
 
-	<div id="map"></div>
+	<div id="map" bind:offsetWidth={pageWidth}></div>
 	
 </main>
 
@@ -179,8 +184,8 @@
 	#line {
 		position: absolute;
 		top: 0px;
-		left: calc(100% / 2);
-		z-index: 3;
+		/* left: calc(var(--left)); */
+		z-index: 0;
 		width: 2px;
 		height: 100%;
 		background-color: #AB1368;
@@ -189,6 +194,7 @@
 	#swipe {
 		background-color: none;
 		margin-top: 50px;
+		z-index: 99;
 	}
 	
 	
