@@ -7,30 +7,16 @@
 	import OSM from 'ol/source/OSM';
 	import {getRenderPixel} from 'ol/render';
 	import {useGeographic} from 'ol/proj';
-	import TileWMS from 'ol/source/TileWMS';
 	import WMTS from 'ol/source/WMTS';
 	import WMTSTileGrid from 'ol/tilegrid/WMTS';
-	import {fromLonLat, get as getProjection} from 'ol/proj';
+	import {get as getProjection} from 'ol/proj';
 	import {getWidth} from 'ol/extent';
 
+	let lineBreak = 50;
 
-	// mapboxgl.accessToken = 'pk.eyJ1Ijoic2Nob29sb2ZjaXRpZXMiLCJhIjoiY2w3aml0dHdlMHlpazNwbWh0em4xOHNlaCJ9.fXNtPGq0DqYiFvPH6p4fjQ';
+	$: console.log(lineBreak)
 
-	// const data = Places.features;
-
-	// let map;
-	// let ctuid = "0";
-
-	// let pageWidth;
-	
 	onMount(() => {
-		// var map = L.map('map').setView([43.672, -79.384], 15);
-
-		// var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {});
-
-		// var cart = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {});
-
-		// cart.addTo(map);
 
 		useGeographic();
 
@@ -51,27 +37,12 @@
 			matrixIds: matrixIds,
 		});
 
-		const osm2 = new TileLayer({
-				source: new OSM()
-				});
 		const osm = new TileLayer({
 				source: new OSM()
 				});
 
 		const t1965 =new TileLayer({
-			// extent: [-13884991, 2870341, -7455066, 6338219],
 			opacity: 1,
-			// source: new WMTS({
-			// 	url: 'https://wxs.ign.fr/choisirgeoportail/geoportail/wmts',
-			// 	layer: 'GEOGRAPHICALGRIDSYSTEMS.PLANIGNV2',
-			// 	matrixSet: 'PM',
-			// 	format: 'image/png',
-			// 	projection: 'EPSG:3857',
-			// 	tileGrid: tileGrid,
-			// 	style: 'normal',
-			// 	attributions:
-			// 		'meow',
-			// 	})
 			source: new WMTS({
 				url: 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_historic_aerial_1965/MapServer/WMTS/',
 				layer: 'basemap_cot_historic_aerial_1965',
@@ -85,18 +56,33 @@
 				})
 		});
 
+		const t2021 =new TileLayer({
+			opacity: 1,
+			source: new WMTS({
+				url: 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho/MapServer/WMTS',
+				layer: 'basemap_cot_ortho',
+				matrixSet: 'default028mm',
+				format: 'image/jpg',
+				projection: 'EPSG:3857',
+				tileGrid: tileGrid,
+				style: 'default',
+				attributions:
+					'cat',
+				})
+		});
+
 		const map = new Map({
 			target: 'map',
-			layers: [t1965, osm],
+			layers: [osm, t1965, t2021],
 			view: new View({
-				center: [-79.42,43.66],
-				zoom: 12
-			})	
+				center: [-79.395,43.66],
+				zoom: 17
+			})
 		});
 
 		const swipe = document.getElementById('swipe');
 
-		osm.on('prerender', function (event) {
+		t2021.on('prerender', function (event) {
 			const ctx = event.context;
 			const mapSize = map.getSize();
 			const width = mapSize[0] * (swipe.value / 100);
@@ -115,17 +101,15 @@
 			ctx.clip();
 		});
 
-		osm.on('postrender', function (event) {
-		const ctx = event.context;
-		ctx.restore();
+		t2021.on('postrender', function (event) {
+			const ctx = event.context;
+			ctx.restore();
 		});
 
 		swipe.addEventListener('input', function () {
-		map.render();
+			map.render();
 		});
 	})
-
-
 
 </script>
 
@@ -142,18 +126,15 @@
 
 
 
-
-
-
-
-
 <main>
-	<!-- <Top/> -->
 
-	<input id="swipe" type="range" style="width: 100%">
+	<Top/>
+
+	<input id="swipe" type="range" bind:value={lineBreak} style="width: 100%">
+
+	<div id="line"></div>
 
 	<div id="map"></div>
-
 	
 </main>
 
@@ -195,8 +176,19 @@
 		z-index: -99;
 	}
 
+	#line {
+		position: absolute;
+		top: 0px;
+		left: calc(100% / 2);
+		z-index: 3;
+		width: 2px;
+		height: 100%;
+		background-color: #AB1368;
+	}
+
 	#swipe {
 		background-color: none;
+		margin-top: 50px;
 	}
 	
 	
