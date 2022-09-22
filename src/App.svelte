@@ -5,7 +5,6 @@
 
 	import {Map, View} from 'ol';
 	import TileLayer from 'ol/layer/Tile';
-	import OSM from 'ol/source/OSM';
 	import {Fill, Stroke, Style} from 'ol/style';
 	import {getRenderPixel} from 'ol/render';
 	import {useGeographic} from 'ol/proj';
@@ -21,10 +20,6 @@
 	let pageWidth = 420;
 
 	$: lineLeft = parseInt(pageWidth * (lineBreak / 100) + 1);
-
-	$: console.log(lineLeft);
-
-	console.log(notToronto)
 
 	onMount(() => {
 
@@ -48,10 +43,6 @@
 			matrixIds: matrixIds,
 		});
 
-		// const osm = new TileLayer({
-		// 		source: new OSM()
-		// 		});
-
 		var features = new GeoJSON().readFeatures(notToronto, {
 		});
 
@@ -74,7 +65,7 @@
 			style: style
 		});
 
-		const t1965 =new TileLayer({
+		const t1965 = new TileLayer({
 			opacity: 1,
 			source: new WMTS({
 				url: 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_historic_aerial_1965/MapServer/WMTS/',
@@ -89,7 +80,7 @@
 				})
 		});
 
-		const t2021 =new TileLayer({
+		const t2021 = new TileLayer({
 			opacity: 1,
 			source: new WMTS({
 				url: 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho/MapServer/WMTS',
@@ -146,23 +137,10 @@
 			map.render();
 		});
 
-		
-
 	})
-
-
 
 </script>
 
-<svelte:head>
-	<script src="https://unpkg.com/elm-pep@1.0.6/dist/elm-pep.js"></script>
-	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
-	integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
-	crossorigin=""/>
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
-	<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-</svelte:head>
 
 
 
@@ -179,8 +157,6 @@
 
 	<div id="line" style="left: {lineLeft}px;"></div>
 
-	
-	
 </main>
 
 
@@ -195,8 +171,6 @@
 
 <style>
 
-	
-	
 	@import "../node_modules/ol/ol.css";
 	
 	@font-face {
@@ -216,14 +190,10 @@
 		padding: 0px;
 		width: 100%;
 		max-width: 100%;
-		
 		overflow: hidden;
-		/* position: fixed; */
-		/* margin-bottom: -15px; */
 	}
 
 	#map {
-		/* margin-top: 50px; */
 		height: calc(100vh);
 		width: calc(100vw);
 		top: 0;
@@ -236,7 +206,6 @@
 	#line {
 		position: absolute;
 		top: 0px;
-		/* left: calc(var(--left)); */
 		z-index: 0;
 		width: 5px;
 		height: calc(100vh - 36px);
@@ -252,19 +221,11 @@
 		margin-left: -10px;
 		margin-right: -4px;
 		z-index: 99;
-		/* overflow-x: hidden; */
-		/* overflow: hidden; */
-		/* padding-top:100vh; */
 	}
 
 	#swipe {
-		/* background-color: rgba(231, 0, 0, 200); */
 		z-index: -99;
 		height: 0px;
-		
-		/* margin-left: -20px; */
-		/* margin-top: 50px; */
-		
 	}
 
 	input[type="range"] {
@@ -292,6 +253,5 @@
 		background-color: white;
 		z-index: 10
 	}
-
 	
 </style>
