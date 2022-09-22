@@ -21,9 +21,9 @@
 		height: 50px;
 		background-color: #fff;
 		margin-bottom: 20px;
-		border-bottom: 2px solid #AB1368;
-		border-left: 2px solid #AB1368;
-		border-right: 2px solid #AB1368;
+		border-bottom: 2px solid #0D534D;
+		border-left: 2px solid #0D534D;
+		border-right: 2px solid #0D534D;
 		border-bottom-right-radius: 15px;
 		border-bottom-left-radius: 15px;
 		width: 200px;

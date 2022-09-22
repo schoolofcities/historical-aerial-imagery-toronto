@@ -14,11 +14,11 @@
 
 	let lineBreak = 50;
 	let pageWidth = 420;
+	let map;
 
-	$: lineLeft = parseInt(pageWidth * (lineBreak / 100));
+	$: lineLeft = parseInt(pageWidth * (lineBreak / 100) + 1);
 
 	$: console.log(lineLeft);
-
 
 	onMount(() => {
 
@@ -72,13 +72,13 @@
 				tileGrid: tileGrid,
 				style: 'default',
 				attributions:
-					'cat',
+					'School of Cities | OpenStreetMap | City of Toronto | Map and Data Library | Jeff Allen',
 				})
 		});
 
 		const map = new Map({
 			target: 'map',
-			layers: [osm, t1965, t2021],
+			layers: [t1965, t2021],
 			view: new View({
 				center: [-79.395,43.66],
 				zoom: 17
@@ -88,33 +88,39 @@
 		const swipe = document.getElementById('swipe');
 
 		t2021.on('prerender', function (event) {
-			const ctx = event.context;
-			const mapSize = map.getSize();
-			const width = mapSize[0] * (lineBreak / 100);
-			const tl = getRenderPixel(event, [width, 0]);
-			const tr = getRenderPixel(event, [mapSize[0], 0]);
-			const bl = getRenderPixel(event, [width, mapSize[1]]);
-			const br = getRenderPixel(event, mapSize);
+					const ctx = event.context;
+					const mapSize = map.getSize();
+					const width = mapSize[0] * (lineBreak / 100);
+					const tl = getRenderPixel(event, [width, 0]);
+					const tr = getRenderPixel(event, [mapSize[0], 0]);
+					const bl = getRenderPixel(event, [width, mapSize[1]]);
+					const br = getRenderPixel(event, mapSize);
 
-			ctx.save();
-			ctx.beginPath();
-			ctx.moveTo(tl[0], tl[1]);
-			ctx.lineTo(bl[0], bl[1]);
-			ctx.lineTo(br[0], br[1]);
-			ctx.lineTo(tr[0], tr[1]);
-			ctx.closePath();
-			ctx.clip();
-		});
+					ctx.save();
+					ctx.beginPath();
+					ctx.moveTo(tl[0], tl[1]);
+					ctx.lineTo(bl[0], bl[1]);
+					ctx.lineTo(br[0], br[1]);
+					ctx.lineTo(tr[0], tr[1]);
+					ctx.closePath();
+					ctx.clip();
+				});
 
-		t2021.on('postrender', function (event) {
-			const ctx = event.context;
-			ctx.restore();
-		});
+				t2021.on('postrender', function (event) {
+					const ctx = event.context;
+					ctx.restore();
+				});
+		
 
 		swipe.addEventListener('input', function () {
 			map.render();
 		});
+
+		
+
 	})
+
+
 
 </script>
 
@@ -135,11 +141,15 @@
 
 	<Top/>
 
-	<input id="swipe" type="range" bind:value={lineBreak} style="width: 100%">
+	<div id="map" bind:offsetWidth={pageWidth}></div>
+
+	<div id="range">
+		<input id="swipe" type="range" bind:value={lineBreak} style="width: 100%">
+	</div>
 
 	<div id="line" style="left: {lineLeft}px;"></div>
 
-	<div id="map" bind:offsetWidth={pageWidth}></div>
+	
 	
 </main>
 
@@ -154,6 +164,8 @@
 
 
 <style>
+
+	
 	
 	@import "../node_modules/ol/ol.css";
 	
@@ -164,21 +176,31 @@
 	:root {
 		font-family: 'Roboto', sans-serif;
 	}
+	
+	:global(body) {
+		overflow: hidden;
+	}
 
 	main {
-		margin: auto;
+		margin: 0px;
+		padding: 0px;
 		width: 100%;
+		max-width: 100%;
+		
+		overflow: hidden;
+		/* position: fixed; */
 		/* margin-bottom: -15px; */
 	}
 
 	#map {
 		/* margin-top: 50px; */
-		height: 100%;
-		width: 100%;
+		height: calc(100vh);
+		width: calc(100vw);
 		top: 0;
         left: 0;
 		position: absolute;
 		z-index: -99;
+		margin: 0px;
 	}
 
 	#line {
@@ -186,16 +208,59 @@
 		top: 0px;
 		/* left: calc(var(--left)); */
 		z-index: 0;
-		width: 2px;
-		height: 100%;
-		background-color: #AB1368;
+		width: 5px;
+		height: calc(100vh - 36px);
+		background-color: white;
+		overflow: hidden;
+		display: none;
+	}
+
+	#range {
+		position: absolute;
+		bottom: 0px;
+		width: calc(100vw - 2px);
+		margin-left: -10px;
+		margin-right: -4px;
+		z-index: 99;
+		/* overflow-x: hidden; */
+		/* overflow: hidden; */
+		/* padding-top:100vh; */
 	}
 
 	#swipe {
-		background-color: none;
-		margin-top: 50px;
-		z-index: 99;
+		/* background-color: rgba(231, 0, 0, 200); */
+		z-index: -99;
+		height: 0px;
+		
+		/* margin-left: -20px; */
+		/* margin-top: 50px; */
+		
 	}
-	
+
+	input[type="range"] {
+		height: 0px;
+	}
+
+	input[type="range"]::-moz-range-thumb {
+		border: solid 1px #0D534D;
+		background-color: white;
+		border-radius: 2px;
+		height: calc(2 * 100vh);
+		width: 10px;
+		cursor: grab;
+		/* background-image: url('./assets/arrows.png');
+		background-repeat:no-repeat;
+		background-position: center center; */
+	}
+	input[type="range"]::-moz-range-thumb:hover {
+		background-color: white;
+	}
+
+	input[type="range"]::-moz-range-track {
+		height: 2px;
+		background-color: white;
+		z-index: 400
+	}
+
 	
 </style>
