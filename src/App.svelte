@@ -248,9 +248,10 @@
 		height: calc(2 * 100vh);
 		width: 10px;
 		cursor: grab;
-		/* background-image: url('./assets/arrows.png');
-		background-repeat:no-repeat;
-		background-position: center center; */
+		/* background-image: url('./assets/arrows.png'); */
+		/* background-repeat:no-repeat; */
+		/* background-position: center center; */
+		box-shadow: 2px 0px 3px #0d534d7b, -2px 0px 3px #0d534d7b;
 	}
 	input[type="range"]::-moz-range-thumb:hover {
 		background-color: white;
@@ -259,7 +260,7 @@
 	input[type="range"]::-moz-range-track {
 		height: 2px;
 		background-color: white;
-		z-index: 400
+		z-index: 10
 	}
 
 	

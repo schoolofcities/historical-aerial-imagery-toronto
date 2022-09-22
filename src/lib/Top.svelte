@@ -26,12 +26,12 @@
 		border-right: 2px solid #0D534D;
 		border-bottom-right-radius: 15px;
 		border-bottom-left-radius: 15px;
-		width: 200px;
-		min-width: 200px;
+		width: 170px;
+		min-width: 170px;
 		padding-left: 0px;
 		padding-right: 0px;
 		text-align: center;
-		z-index: 5;
+		z-index: 9995;
 		box-shadow: 0 3px 0 0 rgba(197, 197, 197, 0.168);
 	}
 	img {
