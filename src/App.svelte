@@ -80,8 +80,10 @@
 			target: 'map',
 			layers: [t1965, t2021],
 			view: new View({
-				center: [-79.395,43.66],
-				zoom: 17
+				center: [-79.39676,43.66],
+				zoom: 17,
+				maxZoom: 19,
+				minZoom: 12
 			})
 		});
 
