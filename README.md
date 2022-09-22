@@ -3,7 +3,7 @@
 ## Objective:
 
 Create an interactive web map that allows readers to view and compare 
-historical areal imagery for Toronto (hopefully going back as far 1947)
+historical aerial imagery for Toronto (hopefully going back as far 1947)
 
 ### Examples:
 
