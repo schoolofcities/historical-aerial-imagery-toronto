@@ -1,24 +1,30 @@
 <script>
 	import { onMount } from 'svelte';
 	import Top from "./lib/Top.svelte";
+	import notToronto from "./assets/not_toronto.geo.json"
 
 	import {Map, View} from 'ol';
 	import TileLayer from 'ol/layer/Tile';
 	import OSM from 'ol/source/OSM';
+	import {Fill, Stroke, Style} from 'ol/style';
 	import {getRenderPixel} from 'ol/render';
 	import {useGeographic} from 'ol/proj';
 	import WMTS from 'ol/source/WMTS';
 	import WMTSTileGrid from 'ol/tilegrid/WMTS';
 	import {get as getProjection} from 'ol/proj';
 	import {getWidth} from 'ol/extent';
+	import GeoJSON from 'ol/format/GeoJSON';
+	import VectorLayer from 'ol/layer/Vector';
+	import VectorSource from 'ol/source/Vector';
 
 	let lineBreak = 50;
 	let pageWidth = 420;
-	let map;
 
 	$: lineLeft = parseInt(pageWidth * (lineBreak / 100) + 1);
 
 	$: console.log(lineLeft);
+
+	console.log(notToronto)
 
 	onMount(() => {
 
@@ -42,9 +48,31 @@
 			matrixIds: matrixIds,
 		});
 
-		const osm = new TileLayer({
-				source: new OSM()
-				});
+		// const osm = new TileLayer({
+		// 		source: new OSM()
+		// 		});
+
+		var features = new GeoJSON().readFeatures(notToronto, {
+		});
+
+		var vectorSource = new VectorSource({
+			features
+		});
+
+		const style = new Style({
+			fill: new Fill({
+				color: '#fff',
+			}),
+			stroke: new Stroke({
+				color: '#0D534D',
+				width: 2
+			})
+		});
+
+		var vectorLayer = new VectorLayer({
+			source: vectorSource,
+			style: style
+		});
 
 		const t1965 =new TileLayer({
 			opacity: 1,
@@ -78,10 +106,10 @@
 
 		const map = new Map({
 			target: 'map',
-			layers: [t1965, t2021],
+			layers: [t1965, t2021, vectorLayer],
 			view: new View({
 				center: [-79.39676,43.66],
-				zoom: 17,
+				zoom: 13,
 				maxZoom: 19,
 				minZoom: 12
 			})
@@ -90,28 +118,28 @@
 		const swipe = document.getElementById('swipe');
 
 		t2021.on('prerender', function (event) {
-					const ctx = event.context;
-					const mapSize = map.getSize();
-					const width = mapSize[0] * (lineBreak / 100);
-					const tl = getRenderPixel(event, [width, 0]);
-					const tr = getRenderPixel(event, [mapSize[0], 0]);
-					const bl = getRenderPixel(event, [width, mapSize[1]]);
-					const br = getRenderPixel(event, mapSize);
+			const ctx = event.context;
+			const mapSize = map.getSize();
+			const width = mapSize[0] * (lineBreak / 100);
+			const tl = getRenderPixel(event, [width, 0]);
+			const tr = getRenderPixel(event, [mapSize[0], 0]);
+			const bl = getRenderPixel(event, [width, mapSize[1]]);
+			const br = getRenderPixel(event, mapSize);
 
-					ctx.save();
-					ctx.beginPath();
-					ctx.moveTo(tl[0], tl[1]);
-					ctx.lineTo(bl[0], bl[1]);
-					ctx.lineTo(br[0], br[1]);
-					ctx.lineTo(tr[0], tr[1]);
-					ctx.closePath();
-					ctx.clip();
-				});
+			ctx.save();
+			ctx.beginPath();
+			ctx.moveTo(tl[0], tl[1]);
+			ctx.lineTo(bl[0], bl[1]);
+			ctx.lineTo(br[0], br[1]);
+			ctx.lineTo(tr[0], tr[1]);
+			ctx.closePath();
+			ctx.clip();
+		});
 
-				t2021.on('postrender', function (event) {
-					const ctx = event.context;
-					ctx.restore();
-				});
+		t2021.on('postrender', function (event) {
+			const ctx = event.context;
+			ctx.restore();
+		});
 		
 
 		swipe.addEventListener('input', function () {
