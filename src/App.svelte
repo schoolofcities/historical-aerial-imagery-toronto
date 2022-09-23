@@ -18,32 +18,42 @@
 
 	let lineBreak = 50;
 	let pageWidth = 420;
+	let leftYear = 1954;
+	let map = 0;
+	let load = 0;
 
-	$: lineLeft = parseInt(pageWidth * (lineBreak / 100) + 1);
+	useGeographic();
 
-	onMount(() => {
+	const resolutions = [];
+	const matrixIds = [];
+	const proj3857 = getProjection('EPSG:3857');
+	const maxResolution = getWidth(proj3857.getExtent()) / 256;
 
-		useGeographic();
+	for (let i = 0; i < 20; i++) {
+		matrixIds[i] = i.toString();
+		resolutions[i] = maxResolution / Math.pow(2, i);
+	}
 
-		lineBreak = 50;
+	const tileGrid = new WMTSTileGrid({
+		origin: [-20037508, 20037508],
+		resolutions: resolutions,
+		matrixIds: matrixIds,
+	});
 
-		const resolutions = [];
-		const matrixIds = [];
-		const proj3857 = getProjection('EPSG:3857');
-		const maxResolution = getWidth(proj3857.getExtent()) / 256;
-
-		for (let i = 0; i < 20; i++) {
-			matrixIds[i] = i.toString();
-			resolutions[i] = maxResolution / Math.pow(2, i);
+	const sources = {
+		'1965': {
+			'url': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_historic_aerial_1965/MapServer/WMTS/',
+			'layer': 'basemap_cot_historic_aerial_1965',
+			'matrixSet': 'default028mm'
+		},
+		'1954': {
+			'url': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_historic_aerial_1954/MapServer/WMTS/',
+			'layer': 'basemap_cot_historic_aerial_1954',
+			'matrixSet': 'default028mm'
 		}
+	}
 
-		const tileGrid = new WMTSTileGrid({
-			origin: [-20037508, 20037508],
-			resolutions: resolutions,
-			matrixIds: matrixIds,
-		});
-
-		var features = new GeoJSON().readFeatures(notToronto, {
+	var features = new GeoJSON().readFeatures(notToronto, {
 		});
 
 		var vectorSource = new VectorSource({
@@ -64,40 +74,46 @@
 			source: vectorSource,
 			style: style
 		});
+		
+	$: lineLeft = parseInt(pageWidth * (lineBreak / 100) + 1);
 
-		const t1965 = new TileLayer({
+	var leftLayer = new TileLayer({
 			opacity: 1,
 			source: new WMTS({
-				url: 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_historic_aerial_1965/MapServer/WMTS/',
-				layer: 'basemap_cot_historic_aerial_1965',
-				matrixSet: 'default028mm',
+				url: sources[leftYear]['url'],
+				layer: sources[leftYear]['layer'],
+				matrixSet: sources[leftYear]['matrixSet'],
 				format: 'image/jpg',
 				projection: 'EPSG:3857',
 				tileGrid: tileGrid,
 				style: 'default',
 				attributions:
 					'meow',
-				})
+			})
 		});
 
-		const t2021 = new TileLayer({
-			opacity: 1,
-			source: new WMTS({
-				url: 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho/MapServer/WMTS',
-				layer: 'basemap_cot_ortho',
-				matrixSet: 'default028mm',
-				format: 'image/jpg',
-				projection: 'EPSG:3857',
-				tileGrid: tileGrid,
-				style: 'default',
-				attributions:
-					'School of Cities | OpenStreetMap | City of Toronto | Map and Data Library | Jeff Allen',
-				})
-		});
+	var rightLayer = new TileLayer({
+		opacity: 1,
+		source: new WMTS({
+			url: 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho/MapServer/WMTS',
+			layer: 'basemap_cot_ortho',
+			matrixSet: 'default028mm',
+			format: 'image/jpg',
+			projection: 'EPSG:3857',
+			tileGrid: tileGrid,
+			style: 'default',
+			attributions:
+				'School of Cities | OpenStreetMap | City of Toronto | Map and Data Library | Jeff Allen',
+			})
+	});
 
-		const map = new Map({
+	onMount(() => {
+
+		load = 1;
+
+		map = new Map({
 			target: 'map',
-			layers: [t1965, t2021, vectorLayer],
+			layers: [leftLayer, rightLayer, vectorLayer],
 			view: new View({
 				center: [-79.39676,43.66],
 				zoom: 13,
@@ -108,7 +124,7 @@
 
 		const swipe = document.getElementById('swipe');
 
-		t2021.on('prerender', function (event) {
+		rightLayer.on('prerender', function (event) {
 			const ctx = event.context;
 			const mapSize = map.getSize();
 			const width = mapSize[0] * (lineBreak / 100);
@@ -127,17 +143,87 @@
 			ctx.clip();
 		});
 
-		t2021.on('postrender', function (event) {
+		rightLayer.on('postrender', function (event) {
 			const ctx = event.context;
 			ctx.restore();
 		});
 		
-
 		swipe.addEventListener('input', function () {
 			map.render();
 		});
 
 	})
+
+	function layerSwitch() {
+		if (load > 0) {
+			console.log(leftYear)
+			console.log("meow")
+
+			map.removeLayer(leftLayer);
+			map.removeLayer(rightLayer);
+
+			leftLayer = new TileLayer({
+				opacity: 1,
+				source: new WMTS({
+					url: sources[leftYear]['url'],
+					layer: sources[leftYear]['layer'],
+					matrixSet: sources[leftYear]['matrixSet'],
+					format: 'image/jpg',
+					projection: 'EPSG:3857',
+					tileGrid: tileGrid,
+					style: 'default',
+					attributions:
+						'meow',
+				})
+			});
+			map.addLayer(leftLayer);
+
+			rightLayer = new TileLayer({
+				opacity: 1,
+				source: new WMTS({
+					url: 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho/MapServer/WMTS',
+					layer: 'basemap_cot_ortho',
+					matrixSet: 'default028mm',
+					format: 'image/jpg',
+					projection: 'EPSG:3857',
+					tileGrid: tileGrid,
+					style: 'default',
+					attributions:
+						'School of Cities | OpenStreetMap | City of Toronto | Map and Data Library | Jeff Allen',
+					})
+			});
+			map.addLayer(rightLayer);
+
+			rightLayer.on('prerender', function (event) {
+				const ctx = event.context;
+				const mapSize = map.getSize();
+				const width = mapSize[0] * (lineBreak / 100);
+				const tl = getRenderPixel(event, [width, 0]);
+				const tr = getRenderPixel(event, [mapSize[0], 0]);
+				const bl = getRenderPixel(event, [width, mapSize[1]]);
+				const br = getRenderPixel(event, mapSize);
+
+				ctx.save();
+				ctx.beginPath();
+				ctx.moveTo(tl[0], tl[1]);
+				ctx.lineTo(bl[0], bl[1]);
+				ctx.lineTo(br[0], br[1]);
+				ctx.lineTo(tr[0], tr[1]);
+				ctx.closePath();
+				ctx.clip();
+			});
+
+			rightLayer.on('postrender', function (event) {
+				const ctx = event.context;
+				ctx.restore();
+			});
+
+			map.removeLayer(vectorLayer);
+			map.addLayer(vectorLayer);
+		}
+	}
+
+	$: leftYear && layerSwitch()
 
 </script>
 
@@ -155,7 +241,24 @@
 		<input id="swipe" type="range" bind:value={lineBreak} style="width: 100%">
 	</div>
 
-	<div id="line" style="left: {lineLeft}px;"></div>
+	<div id="left-select">
+
+		<label>
+			<input type=radio bind:group={leftYear} value={1954}>
+			1954
+		</label>
+		
+		<label>
+			<input type=radio bind:group={leftYear} value={1965}>
+			1965
+		</label>
+		
+		<!-- <label>
+			<input type=radio bind:group={leftYear} value={2021}>
+			2021
+		</label> -->
+
+	</div>
 
 </main>
 
@@ -201,17 +304,6 @@
 		position: absolute;
 		z-index: -99;
 		margin: 0px;
-	}
-
-	#line {
-		position: absolute;
-		top: 0px;
-		z-index: 0;
-		width: 5px;
-		height: calc(100vh - 36px);
-		background-color: white;
-		overflow: hidden;
-		display: none;
 	}
 
 	#range {
