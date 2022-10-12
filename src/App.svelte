@@ -22,6 +22,14 @@
 	let map = 0;
 	let load = 0;
 
+	let questions = [
+		{ id: 1, text: '1954' },
+		{ id: 2, text: '1965' },
+		{ id: 3, text: '2021' }
+	];
+
+	let selected;
+
 	useGeographic();
 
 	const resolutions = [];
@@ -225,9 +233,11 @@
 
 	$: leftYear && layerSwitch()
 
+	function handleSubmit() {
+		alert(`answered question ${selected.id} (${selected.text}) with "${answer}"`);
+	}
+
 </script>
-
-
 
 
 
@@ -243,7 +253,17 @@
 
 	<div id="left-select">
 
-		<label>
+		<form on:submit|preventDefault={handleSubmit}>
+			<select bind:value={selected}>
+				{#each questions as question}
+					<option value={question}>
+						{question.text}
+					</option>
+				{/each}
+			</select>
+		</form>
+
+		<!-- <label>
 			<input type=radio bind:group={leftYear} value={1954}>
 			1954
 		</label>
@@ -251,7 +271,7 @@
 		<label>
 			<input type=radio bind:group={leftYear} value={1965}>
 			1965
-		</label>
+		</label> -->
 		
 		<!-- <label>
 			<input type=radio bind:group={leftYear} value={2021}>
