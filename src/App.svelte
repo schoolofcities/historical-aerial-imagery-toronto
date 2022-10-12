@@ -18,7 +18,7 @@
 
 	let lineBreak = 50;
 	let pageWidth = 420;
-	let leftYear = 1954;
+	let leftYear = 1965;
 	let map = 0;
 	let load = 0;
 
