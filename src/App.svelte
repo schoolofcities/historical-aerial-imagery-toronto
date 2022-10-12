@@ -18,14 +18,13 @@
 
 	let lineBreak = 50;
 	let pageWidth = 420;
-	let leftYear = 1965;
+	
 	let map = 0;
 	let load = 0;
 
-	let questions = [
-		{ id: 1, text: '1954' },
-		{ id: 2, text: '1965' },
-		{ id: 3, text: '2021' }
+	let leftYear = 1965;
+	let leftYearSet = [
+		1954, 1965, 1978, 2021
 	];
 
 	let selected;
@@ -58,7 +57,18 @@
 			'url': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_historic_aerial_1954/MapServer/WMTS/',
 			'layer': 'basemap_cot_historic_aerial_1954',
 			'matrixSet': 'default028mm'
-		}
+		},
+		'1978': {
+			'url': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_historic_aerial_1978/MapServer/WMTS/',
+			'layer': 'basemap_cot_historic_aerial_1978',
+			'matrixSet': 'default028mm'
+		},
+		'2021': {
+			'url': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho/MapServer/WMTS',
+			'layer': 'basemap_cot_ortho',
+			'matrixSet': 'default028mm'
+		},
+
 	}
 
 	var features = new GeoJSON().readFeatures(notToronto, {
@@ -237,6 +247,7 @@
 		alert(`answered question ${selected.id} (${selected.text}) with "${answer}"`);
 	}
 
+
 </script>
 
 
@@ -253,11 +264,11 @@
 
 	<div id="left-select">
 
-		<form on:submit|preventDefault={handleSubmit}>
-			<select bind:value={selected}>
-				{#each questions as question}
-					<option value={question}>
-						{question.text}
+		<form>
+			<select bind:value={leftYear}>
+				{#each leftYearSet as year}
+					<option value={year}>
+						{year}
 					</option>
 				{/each}
 			</select>
