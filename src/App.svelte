@@ -384,7 +384,7 @@
 	} */
 
 	input[type="range"] {
-		height: 1px;
+		height: 0px;
 		margin-left: -10px;
 		-webkit-appearance: none; 
 	}
@@ -410,14 +410,14 @@
 	input[type="range"]::-webkit-slider-thumb {
 		-webkit-appearance: none;
 		/* overflow: hidden; */
-		height: 42px;
-		width: 42px;
+		height: 45px;
+		width: 45px;
 		background-color: white;
 		border-radius: 22px;
 		border: 2px solid white;
 		cursor: grab;
 		background-image: url('./assets/arrows.svg');
-		margin-top: -15px;
+		/* margin-top: -15px; */
 	}
 	input[type="range"]::-webkit-slider-thumb:hover {
 		background-color: #F1C500;
