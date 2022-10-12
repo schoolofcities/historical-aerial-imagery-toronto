@@ -2,9 +2,9 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="10"
-   height="28"
-   viewBox="0 0 2.6458333 7.4083335"
+   width="42"
+   height="42"
+   viewBox="0 0 11.1125 11.1125"
    version="1.1"
    id="svg5"
    inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
@@ -25,21 +25,24 @@
      inkscape:pageopacity="0.0"
      inkscape:pagecheckerboard="0"
      inkscape:document-units="mm"
-     showgrid="true"
+     showgrid="false"
      units="px"
      width="42px"
-     inkscape:zoom="20.174419"
-     inkscape:cx="11.945821"
-     inkscape:cy="17.323919"
+     inkscape:zoom="10.08721"
+     inkscape:cx="16.654755"
+     inkscape:cy="27.41095"
      inkscape:window-width="1920"
      inkscape:window-height="1016"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer1">
+     inkscape:current-layer="layer1"
+     height="42px">
     <inkscape:grid
        type="xygrid"
-       id="grid824" />
+       id="grid824"
+       spacingx="0.79375"
+       spacingy="0.79375" />
   </sodipodi:namedview>
   <defs
      id="defs2" />
@@ -48,16 +51,14 @@
      inkscape:groupmode="layer"
      id="layer1">
     <path
-       style="fill:#0d534d;fill-opacity:1;stroke:none;stroke-width:0.279282px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="M 8.73125,2.778125 6.2177079,5.2916667 V 0.26458333 L 8.73125,2.778125"
-       id="path972" />
+       style="fill:#0d534d;fill-opacity:1;stroke:none;stroke-width:0.440972px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 10.31875,5.55625 6.35,9.525 V 1.5875 l 3.96875,3.96875"
+       id="path972"
+       sodipodi:nodetypes="cccc" />
     <path
-       style="fill:#0d534d;fill-opacity:1;stroke:none;stroke-width:0.117593px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="M 1.8520839,5.5562506 0.79375,6.6145841 V 4.4979167 l 1.0583339,1.0583339"
-       id="path972-3-3" />
-    <path
-       style="fill:#0d534d;fill-opacity:1;stroke:none;stroke-width:0.117593px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="M 0.79375,1.8520833 1.8520836,0.7937499 V 2.910417 L 0.79375,1.8520833"
-       id="path972-3-3-0" />
+       style="fill:#0d534d;fill-opacity:1;stroke:none;stroke-width:0.440972px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 0.79375,5.55625 4.7625,1.5875 V 9.525 L 0.79375,5.55625"
+       id="path972-4"
+       sodipodi:nodetypes="cccc" />
   </g>
 </svg>

@@ -32,8 +32,6 @@
 		1954, 1965, 1978, 2011, 2021
 	];
 
-	let selected;
-
 	useGeographic();
 
 	const resolutions = [];
@@ -103,8 +101,7 @@
 			style: style
 		});
 		
-	$: lineLeft = parseInt(pageWidth * (lineBreak / 100) + 1);
-
+	
 	var leftLayer = new TileLayer({
 			opacity: 1,
 			source: new WMTS({
@@ -246,13 +243,23 @@
 	$: leftYear && layerSwitch()
 	$: rightYear && layerSwitch()
 
+	$: lineLeft = parseInt(pageWidth * (lineBreak / 100) -2 );
+
+	$: console.log(lineLeft)
+
 </script>
+
+
+
 
 
 
 <main>
 
-	<Top/>
+	<!-- <Top/> -->
+
+	<div id="line" style="left: {lineLeft}px" ></div>
+
 
 	<div id="map" bind:offsetWidth={pageWidth}></div>
 
@@ -288,9 +295,9 @@
 
 	</div>
 
+	
+
 </main>
-
-
 
 
 
@@ -336,60 +343,109 @@
 
 	#left-select {
 		position: absolute;
-		top: 10px;
+		top: 20px;
 		left: 10px;
 		float: left;
 	}
 
 	#right-select {
 		position: absolute;
-		top: 10px;
+		top: 20px;
 		right: 10px;
 		float: right;
 	}
 
-
-
-
+	#line {
+		position: absolute;
+		height: 100%;
+		width: 4px;
+		background-color: rgb(255, 255, 255);
+		margin: 0px;
+		margin-top: -10px;
+	
+		z-index: 50;
+	}
 
 	#range {
 		position: absolute;
-		bottom: 0px;
-		width: calc(100vw - 2px);
+		top: calc(100vh / 2.1 );
+		height: 0px;
+		width: calc(100vw + 22px);
 		margin-left: -10px;
 		margin-right: -4px;
 		z-index: 99;
+
 	}
 
-	#swipe {
+	/* #swipe {
 		z-index: -99;
-		height: 0px;
-	}
+		height: 1px;
+		color: white;
+	} */
 
 	input[type="range"] {
-		height: 0px;
+		height: 1px;
+		margin-left: -10px;
+		-webkit-appearance: none; 
 	}
+
+	input[type=range]::-webkit-slider-thumb {
+		-webkit-appearance: none;
+		}
+
+		input[type=range]:focus {
+		outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
+		}
+
+		input[type=range]::-ms-track {
+		width: 100%;
+		cursor: pointer;
+
+		/* Hides the slider so custom styles can be added */
+		background: transparent; 
+		border-color: transparent;
+		color: transparent;
+		}
+
+	input[type="range"]::-webkit-slider-thumb {
+		-webkit-appearance: none;
+		/* overflow: hidden; */
+		height: 42px;
+		width: 42px;
+		background-color: white;
+		border-radius: 22px;
+		border: 2px solid white;
+		cursor: grab;
+		background-image: url('./assets/arrows.svg');
+		margin-top: -15px;
+	}
+	input[type="range"]::-webkit-slider-thumb:hover {
+		background-color: #F1C500;
+	}
+
 
 	input[type="range"]::-moz-range-thumb {
-		border: solid 1px #0D534D;
+		overflow: hidden;
+		height: 42px;
+		width: 42px;
 		background-color: white;
-		border-radius: 2px;
-		height: calc(2 * 100vh);
-		width: 10px;
+		border-radius: 22px;
+		border: 2px solid white;
 		cursor: grab;
-		/* background-image: url('./assets/arrows.png'); */
-		/* background-repeat:no-repeat; */
-		/* background-position: center center; */
-		box-shadow: 2px 0px 3px #0d534d7b, -2px 0px 3px #0d534d7b;
+		background-image: url('./assets/arrows.png');
 	}
 	input[type="range"]::-moz-range-thumb:hover {
-		background-color: white;
+		background-color: #F1C500;
 	}
+	
+	
 
-	input[type="range"]::-moz-range-track {
-		height: 2px;
+
+	/* input[type="range"]::-moz-range-track {
+		height: 1px;
 		background-color: white;
 		z-index: 10
-	}
+	} */
+	
 	
 </style>
