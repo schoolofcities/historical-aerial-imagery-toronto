@@ -27,6 +27,11 @@
 		1954, 1965, 1978, 2011, 2021
 	];
 
+	let rightYear = 2021;
+	let rightYearSet = [
+		1954, 1965, 1978, 2011, 2021
+	];
+
 	let selected;
 
 	useGeographic();
@@ -116,14 +121,14 @@
 	var rightLayer = new TileLayer({
 		opacity: 1,
 		source: new WMTS({
-			url: 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho/MapServer/WMTS',
-			layer: 'basemap_cot_ortho',
-			matrixSet: 'default028mm',
+			url: sources[rightYear]['url'],
+			layer: sources[rightYear]['layer'],
+			matrixSet: sources[rightYear]['matrixSet'],
 			format: 'image/jpg',
 			projection: 'EPSG:3857',
 			tileGrid: tileGrid,
 			style: 'default'
-			})
+		})
 	});
 
 	onMount(() => {
@@ -198,14 +203,14 @@
 			rightLayer = new TileLayer({
 				opacity: 1,
 				source: new WMTS({
-					url: 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho/MapServer/WMTS',
-					layer: 'basemap_cot_ortho',
-					matrixSet: 'default028mm',
+					url: sources[rightYear]['url'],
+					layer: sources[rightYear]['layer'],
+					matrixSet: sources[rightYear]['matrixSet'],
 					format: 'image/jpg',
 					projection: 'EPSG:3857',
 					tileGrid: tileGrid,
 					style: 'default'
-					})
+				})
 			});
 			map.addLayer(rightLayer);
 
@@ -239,11 +244,7 @@
 	}
 
 	$: leftYear && layerSwitch()
-
-	function handleSubmit() {
-		alert(`answered question ${selected.id} (${selected.text}) with "${answer}"`);
-	}
-
+	$: rightYear && layerSwitch()
 
 </script>
 
@@ -271,20 +272,19 @@
 			</select>
 		</form>
 
-		<!-- <label>
-			<input type=radio bind:group={leftYear} value={1954}>
-			1954
-		</label>
-		
-		<label>
-			<input type=radio bind:group={leftYear} value={1965}>
-			1965
-		</label> -->
-		
-		<!-- <label>
-			<input type=radio bind:group={leftYear} value={2021}>
-			2021
-		</label> -->
+	</div>
+
+	<div id="right-select">
+
+		<form>
+			<select bind:value={rightYear}>
+				{#each rightYearSet as year}
+					<option value={year}>
+						{year}
+					</option>
+				{/each}
+			</select>
+		</form>
 
 	</div>
 
@@ -333,6 +333,24 @@
 		z-index: -99;
 		margin: 0px;
 	}
+
+	#left-select {
+		position: absolute;
+		top: 10px;
+		left: 10px;
+		float: left;
+	}
+
+	#right-select {
+		position: absolute;
+		top: 10px;
+		right: 10px;
+		float: right;
+	}
+
+
+
+
 
 	#range {
 		position: absolute;
