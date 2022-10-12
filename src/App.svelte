@@ -24,7 +24,7 @@
 
 	let leftYear = 1965;
 	let leftYearSet = [
-		1954, 1965, 1978, 2021
+		1954, 1965, 1978, 2011, 2021
 	];
 
 	let selected;
@@ -48,19 +48,24 @@
 	});
 
 	const sources = {
-		'1965': {
-			'url': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_historic_aerial_1965/MapServer/WMTS/',
-			'layer': 'basemap_cot_historic_aerial_1965',
-			'matrixSet': 'default028mm'
-		},
 		'1954': {
 			'url': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_historic_aerial_1954/MapServer/WMTS/',
 			'layer': 'basemap_cot_historic_aerial_1954',
 			'matrixSet': 'default028mm'
 		},
+		'1965': {
+			'url': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_historic_aerial_1965/MapServer/WMTS/',
+			'layer': 'basemap_cot_historic_aerial_1965',
+			'matrixSet': 'default028mm'
+		},
 		'1978': {
 			'url': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_historic_aerial_1978/MapServer/WMTS/',
 			'layer': 'basemap_cot_historic_aerial_1978',
+			'matrixSet': 'default028mm'
+		},
+		'2011': {
+			'url': 'https://gis.toronto.ca/arcgis/rest/services/primary/cot_ortho_2011_color_10cm_webm/MapServer/WMTS/',
+			'layer': 'primary_cot_ortho_2011_color_10cm_webm',
 			'matrixSet': 'default028mm'
 		},
 		'2021': {
@@ -104,9 +109,7 @@
 				format: 'image/jpg',
 				projection: 'EPSG:3857',
 				tileGrid: tileGrid,
-				style: 'default',
-				attributions:
-					'meow',
+				style: 'default'
 			})
 		});
 
@@ -119,9 +122,7 @@
 			format: 'image/jpg',
 			projection: 'EPSG:3857',
 			tileGrid: tileGrid,
-			style: 'default',
-			attributions:
-				'School of Cities | OpenStreetMap | City of Toronto | Map and Data Library | Jeff Allen',
+			style: 'default'
 			})
 	});
 
@@ -189,9 +190,7 @@
 					format: 'image/jpg',
 					projection: 'EPSG:3857',
 					tileGrid: tileGrid,
-					style: 'default',
-					attributions:
-						'meow',
+					style: 'default'
 				})
 			});
 			map.addLayer(leftLayer);
@@ -205,9 +204,7 @@
 					format: 'image/jpg',
 					projection: 'EPSG:3857',
 					tileGrid: tileGrid,
-					style: 'default',
-					attributions:
-						'School of Cities | OpenStreetMap | City of Toronto | Map and Data Library | Jeff Allen',
+					style: 'default'
 					})
 			});
 			map.addLayer(rightLayer);
