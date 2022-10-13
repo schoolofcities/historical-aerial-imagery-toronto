@@ -270,7 +270,7 @@
 	<div id="left-select">
 
 		<form>
-			<select bind:value={leftYear}>
+			<select bind:value={leftYear} id="select">
 				{#each leftYearSet as year}
 					<option value={year}>
 						{year}
@@ -343,16 +343,41 @@
 
 	#left-select {
 		position: absolute;
-		top: 20px;
+		top: 10px;
 		left: 10px;
 		float: left;
 	}
 
 	#right-select {
 		position: absolute;
-		top: 20px;
+		top: 10px;
 		right: 10px;
 		float: right;
+	}
+
+	select {
+		appearance: none;
+		background-color: transparent;
+		border: none;
+		padding: 0 1em 0 0;
+		margin: 0;
+		width: 100%;
+		font-family: inherit;
+		font-size: inherit;
+		cursor: inherit;
+		line-height: inherit;
+	}
+
+	#select {
+		width: 75px;
+		border: 1px solid #F1C500;
+		border-radius: 0.25em;
+		padding: 0.25em 0.5em;
+		font-size: 15px;
+		cursor: pointer;
+		line-height: 1.1;
+		background-color: #fff;
+		/* background-image: linear-gradient(to top, #f9f9f9, #fff 33%); */
 	}
 
 	#line {
@@ -362,7 +387,6 @@
 		background-color: rgb(255, 255, 255);
 		margin: 0px;
 		margin-top: -10px;
-	
 		z-index: 50;
 	}
 
@@ -370,11 +394,10 @@
 		position: absolute;
 		top: calc(100vh / 2.1 );
 		height: 0px;
-		width: calc(100vw + 22px);
+		width: calc(100vw + 44px);
 		margin-left: -10px;
 		margin-right: -4px;
 		z-index: 99;
-
 	}
 
 	/* #swipe {
@@ -385,7 +408,7 @@
 
 	input[type="range"] {
 		height: 0px;
-		margin-left: -10px;
+		margin-left: -22px;
 		-webkit-appearance: none; 
 	}
 
