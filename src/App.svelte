@@ -27,29 +27,24 @@
 
 	let leftYear = 1965;
 	const leftYearSet = [
-		"1954", "1965", "1978", "2011", "2021"
+		1954, 1965, 1978, 2011, 2021
 	];
+	function handleSelectLeft(event) {
+		console.log('selected item', event.detail);
+		leftYear = event.detail.value
+	}
 
 	let rightYear = 2021;
 	let rightYearSet = [
 		1954, 1965, 1978, 2011, 2021
 	];
-
-	// let items = [
-    // {value: 'chocolate', label: 'Chocolate'},
-    // {value: 'pizza', label: 'Pizza'},
-    // {value: 'cake', label: 'Cake'},
-    // {value: 'chips', label: 'Chips'},
-    // {value: 'ice-cream', label: 'Ice Cream'},
-	// ];
-
-	let value = {value: 'cake', label: 'Cake'};
-
-	function handleSelect(event) {
+	function handleSelectRight(event) {
 		console.log('selected item', event.detail);
-		// .. do something here 🙂
+		rightYear = event.detail.value
 	}
 
+
+	
 
 
 	useGeographic();
@@ -265,8 +260,6 @@
 
 	$: lineLeft = parseInt(pageWidth * (lineBreak / 100) -2 );
 
-	$: console.log(lineLeft)
-
 </script>
 
 
@@ -299,13 +292,19 @@
 			</select>
 		</form> -->
 
-		<Select items={leftYearSet}></Select>
+		<Select 
+			items={leftYearSet} 
+			value="1965"
+			isClearable={false}
+			on:select={handleSelectLeft}
+		>
+		</Select>
 
 	</div>
 
 	<div id="right-select">
 
-		<form>
+		<!-- <form>
 			<select bind:value={rightYear}>
 				{#each rightYearSet as year}
 					<option value={year}>
@@ -313,7 +312,7 @@
 					</option>
 				{/each}
 			</select>
-		</form>
+		</form> -->
 
 	</div>
 
@@ -362,11 +361,25 @@
 	}
 
 	#left-select {
+		z-index: 999999;
+		cursor: pointer;
 		position: absolute;
 		top: 10px;
 		left: 10px;
 		float: left;
 		width: 100px;
+		font-family: 'Roboto', sans-serif;
+		font-size: 14px;
+		opacity: 0.95;
+		--border: 1px solid #F1C500;
+		--borderRadius: 0px;
+		--height: 28px;
+		--borderFocusColor: #0D534D;
+		--itemColor: black;
+		--itemHoverBG: #F1C500;
+		--itemIsActiveBG: #0D534D;
+		--listBorderRadius: 0px;
+		--itemFirstBorderRadius: 0px;
 	}
 
 	#right-select {
@@ -376,7 +389,11 @@
 		float: right;
 	}
 
-	select {
+	
+		
+
+
+	/* select {
 		appearance: none;
 		background-color: transparent;
 		border: none;
@@ -387,7 +404,7 @@
 		font-size: inherit;
 		cursor: inherit;
 		line-height: inherit;
-	}
+	} */
 
 	/* #select {
 		width: 75px;
