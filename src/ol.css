@@ -3,7 +3,7 @@
   --ol-background-color: white;
   --ol-accent-background-color: #F5F5F5;
   --ol-subtle-background-color: rgba(128, 128, 128, 0.25);
-  --ol-partial-background-color: rgba(255, 255, 255, 0.75);
+  --ol-partial-background-color: rgba(255, 255, 255, 0.6);
   --ol-foreground-color: #333333;
   --ol-subtle-foreground-color: #666666;
   --ol-brand-color: #00AAFF;
@@ -25,8 +25,8 @@
 .ol-scale-line {
   background: var(--ol-partial-background-color);
   border-radius: 4px;
-  bottom: 8px;
-  left: 8px;
+  bottom: 10px;
+  left: 40px;
   padding: 2px;
   position: absolute;
 }
@@ -288,14 +288,16 @@
 }
 
 .ol-zoomslider {
-  top: 4.5em;
-  left: .5em;
-  height: 200px;
+  bottom: 65px;
+  left: 10px;
+  height: 100px;
+  background-color: rgba(255, 255, 255, 0.6);
 }
 
 .ol-zoomslider button {
   position: relative;
   height: 10px;
+  border: solid 1px rgb(116, 116, 116);
 }
 
 .ol-touch .ol-zoomslider {

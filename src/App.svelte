@@ -22,6 +22,11 @@
 	import VectorLayer from 'ol/layer/Vector';
 	import VectorSource from 'ol/source/Vector';
 
+	import ZoomSlider from 'ol/control/ZoomSlider';
+	import {defaults as defaultControls} from 'ol/control';
+	import {ScaleLine} from 'ol/control';
+
+
 	let lineBreak = 50;
 	let pageWidth = 420;
 	
@@ -45,9 +50,6 @@
 		console.log('selected item', event.detail);
 		rightYear = event.detail.value
 	}
-
-
-	
 
 
 	useGeographic();
@@ -159,8 +161,11 @@
 				maxZoom: 19,
 				minZoom: 12,
 				extent: [-79.8302,43.3046,-78.9160,44.0295],
-			})
+			}),
+			controls: defaultControls().extend([new ZoomSlider()])
 		});
+
+		map.addControl(new ScaleLine({units: 'metric', maxWidth: 75}));
 
 		const swipe = document.getElementById('swipe');
 
@@ -267,6 +272,7 @@
 </script>
 
 
+
 <svelte:head>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
@@ -319,10 +325,6 @@
 	</div>
 
 </main>
-
-
-
-
 
 
 
@@ -466,6 +468,7 @@
 		background-image: url('./assets/arrows.svg');
 		/* margin-top: -15px; */
 	}
+
 	input[type="range"]::-webkit-slider-thumb:hover {
 		background-color: #F1C500;
 	}
@@ -485,15 +488,5 @@
 	input[type="range"]::-moz-range-thumb:hover {
 		background-color: #F1C500;
 	}
-	
-	
-
-
-	/* input[type="range"]::-moz-range-track {
-		height: 1px;
-		background-color: white;
-		z-index: 10
-	} */
-	
 	
 </style>
