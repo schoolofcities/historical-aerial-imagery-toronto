@@ -1,8 +1,10 @@
 <script>
 	import { onMount } from 'svelte';
-	import Top from "./lib/Top.svelte";
+	import Information from "./lib/Information.svelte";
 	import Select from 'svelte-select';
 	import Icon from './lib/Icon.svelte';
+
+	import "./ol.css";
 
 	import notToronto from "./assets/not_toronto.geo.json"
 
@@ -269,7 +271,7 @@
 
 <main>
 
-	<Top/>
+	<Information/>
 
 	<div id="line" style="left: {lineLeft}px" ></div>
 
@@ -318,7 +320,7 @@
 
 <style>
 
-	@import "../node_modules/ol/ol.css";
+	/* @import "../node_modules/ol/ol.css"; */
 	
 	@font-face {
 		font-family: TradeGothicBold;
@@ -341,12 +343,13 @@
 	}
 
 	#map {
+		cursor: hand;
 		height: calc(100vh);
 		width: calc(100vw);
 		top: 0;
         left: 0;
 		position: absolute;
-		z-index: -99;
+		z-index: 1;
 		margin: 0px;
 	}
 
@@ -392,36 +395,6 @@
 		--borderHoverColor: #0D534D;
 	}
 
-
-	
-		
-
-
-	/* select {
-		appearance: none;
-		background-color: transparent;
-		border: none;
-		padding: 0 1em 0 0;
-		margin: 0;
-		width: 100%;
-		font-family: inherit;
-		font-size: inherit;
-		cursor: inherit;
-		line-height: inherit;
-	} */
-
-	/* #select {
-		width: 75px;
-		border: 1px solid #F1C500;
-		border-radius: 0.25em;
-		padding: 0.25em 0.5em;
-		font-size: 15px;
-		cursor: pointer;
-		line-height: 1.1;
-		background-color: #fff;
-		background-image: linear-gradient(to top, #f9f9f9, #fff 33%);
-	} */
-
 	#line {
 		position: absolute;
 		height: 100%;
@@ -441,12 +414,6 @@
 		margin-right: -4px;
 		z-index: 99;
 	}
-
-	/* #swipe {
-		z-index: -99;
-		height: 1px;
-		color: white;
-	} */
 
 	input[type="range"] {
 		height: 0px;
