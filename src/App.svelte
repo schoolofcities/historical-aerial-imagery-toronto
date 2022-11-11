@@ -1,5 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
+	import Title from "./lib/Title.svelte";
 	import Information from "./lib/Information.svelte";
 	import Select from 'svelte-select';
 	import Icon from './lib/Icon.svelte';
@@ -265,11 +266,19 @@
 </script>
 
 
+<svelte:head>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+	<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+</svelte:head>
+
 
 
 
 
 <main>
+
+	<Title/>
 
 	<Information/>
 
@@ -326,8 +335,9 @@
 		font-family: TradeGothicBold;
 		src: url("./assets/Trade Gothic LT Bold.ttf");
 	}
+
 	:root {
-		font-family: 'Roboto', sans-serif;
+		font-family: Roboto, sans-serif;
 	}
 	
 	:global(body) {
