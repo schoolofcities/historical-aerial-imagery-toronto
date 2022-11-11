@@ -269,7 +269,7 @@
 
 <main>
 
-	<!-- <Top/> -->
+	<Top/>
 
 	<div id="line" style="left: {lineLeft}px" ></div>
 
@@ -373,7 +373,7 @@
 		opacity: 0.95;
 		border-right: 2px solid #0D534D;
 		--padding: 0px 0px 0px 7px;
-		--border: 1px solid #0D534D;
+		--border: 1px solid rgb(242, 242, 242);
 		--borderRadius: 0px;
 		--height: 28px;
 		--borderFocusColor: #0D534D;
@@ -389,7 +389,9 @@
 		--itemPadding: 0px 0px 0px 10px;
 		--itemMargin: 0px;
 		--inputColor: white;
+		--borderHoverColor: #0D534D;
 	}
+
 
 	
 		
