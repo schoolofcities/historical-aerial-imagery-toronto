@@ -354,7 +354,7 @@
 	}
 
 	#map {
-		cursor: hand;
+		cursor: grab;
 		height: calc(100vh);
 		width: calc(100vw);
 		top: 0;
@@ -369,7 +369,6 @@
 		top: 10px;
 		left: 10px;
 		float: left;
-		
 	}
 
 	#right-select {
@@ -420,7 +419,7 @@
 		position: absolute;
 		top: calc(100vh / 2.1 );
 		height: 0px;
-		width: calc(100vw + 44px);
+		width: calc(100vw + 47px);
 		margin-left: -10px;
 		margin-right: -4px;
 		z-index: 99;
@@ -429,18 +428,17 @@
 	input[type="range"] {
 		height: 0px;
 		margin-left: -22px;
+		pointer-events: none;
 		-webkit-appearance: none; 
 	}
 
-	input[type=range]::-webkit-slider-thumb {
-		-webkit-appearance: none;
-		}
+	
 
-		input[type=range]:focus {
+	input[type=range]:focus {
 		outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
 		}
 
-		input[type=range]::-ms-track {
+	input[type=range]::-ms-track {
 		width: 100%;
 		cursor: pointer;
 
@@ -450,8 +448,14 @@
 		color: transparent;
 		}
 
+	input[type=range]::-webkit-slider-thumb {
+		-webkit-appearance: none;
+		pointer-events:auto;
+	}
+
 	input[type="range"]::-webkit-slider-thumb {
 		-webkit-appearance: none;
+		pointer-events:auto;
 		/* overflow: hidden; */
 		height: 45px;
 		width: 45px;
@@ -468,6 +472,7 @@
 
 
 	input[type="range"]::-moz-range-thumb {
+		pointer-events:auto;
 		overflow: hidden;
 		height: 42px;
 		width: 42px;
