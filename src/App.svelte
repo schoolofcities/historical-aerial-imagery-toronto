@@ -302,9 +302,9 @@
 	<div id="left-select" class="select">
 
 		<Select 
-			{Icon}
 			items={leftYearSet} 
 			value="1965"
+			isSearchable={false}
 			isClearable={false}
 			on:select={handleSelectLeft}
 		>
@@ -315,9 +315,9 @@
 	<div id="right-select" class="select">
 
 		<Select 
-			{Icon}
 			items={rightYearSet} 
 			value="2021"
+			isSearchable={false}
 			isClearable={false}
 			on:select={handleSelectRight}
 		>
@@ -388,7 +388,7 @@
 
 	.select {
 		z-index: 99;
-		width:82Spx;
+		width: 70px;
 		font-family: 'Roboto', sans-serif;
 		font-size: 14px;
 		opacity: 0.95;
@@ -403,14 +403,14 @@
 		--itemIsActiveBG: #0D534D;
 		--listBorderRadius: 0px;
 		--itemFirstBorderRadius: 0px;
-		--clearSelectWidth: 40px;
-		--indicatorWidth: 0px;
-		--multiClearWidth: 0px;
-		--spinnerWidth: 0px;
 		--itemPadding: 0px 0px 0px 10px;
 		--itemMargin: 0px;
 		--inputColor: white;
 		--borderHoverColor: #0D534D;
+		--indicatorWidth: 20px;
+		--indicatorTop: 4px;
+		--indicatorColor: #0D534D;
+		--indicatorRight: 3px;
 	}
 
 	#line {
