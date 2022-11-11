@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import Top from "./lib/Top.svelte";
 	import Select from 'svelte-select';
-
+	import Icon from './lib/Icon.svelte';
 
 	import notToronto from "./assets/not_toronto.geo.json"
 
@@ -280,19 +280,10 @@
 		<input id="swipe" type="range" bind:value={lineBreak} style="width: 100%">
 	</div>
 
-	<div id="left-select">
-
-		<!-- <form>
-			<select bind:value={leftYear} id="select">
-				{#each leftYearSet as year}
-					<option value={year}>
-						{year}
-					</option>
-				{/each}
-			</select>
-		</form> -->
+	<div id="left-select" class="select">
 
 		<Select 
+			{Icon}
 			items={leftYearSet} 
 			value="1965"
 			isClearable={false}
@@ -302,17 +293,16 @@
 
 	</div>
 
-	<div id="right-select">
+	<div id="right-select" class="select">
 
-		<!-- <form>
-			<select bind:value={rightYear}>
-				{#each rightYearSet as year}
-					<option value={year}>
-						{year}
-					</option>
-				{/each}
-			</select>
-		</form> -->
+		<Select 
+			{Icon}
+			items={rightYearSet} 
+			value="2021"
+			isClearable={false}
+			on:select={handleSelectRight}
+		>
+		</Select>
 
 	</div>
 
@@ -361,17 +351,29 @@
 	}
 
 	#left-select {
-		z-index: 999999;
-		cursor: pointer;
 		position: absolute;
 		top: 10px;
 		left: 10px;
 		float: left;
-		width: 100px;
+		
+	}
+
+	#right-select {
+		position: absolute;
+		top: 10px;
+		right: 10px;
+		float: right;
+	}
+
+	.select {
+		z-index: 99;
+		width:82Spx;
 		font-family: 'Roboto', sans-serif;
 		font-size: 14px;
 		opacity: 0.95;
-		--border: 1px solid #F1C500;
+		border-right: 2px solid #0D534D;
+		--padding: 0px 0px 0px 7px;
+		--border: 1px solid #0D534D;
 		--borderRadius: 0px;
 		--height: 28px;
 		--borderFocusColor: #0D534D;
@@ -380,13 +382,13 @@
 		--itemIsActiveBG: #0D534D;
 		--listBorderRadius: 0px;
 		--itemFirstBorderRadius: 0px;
-	}
-
-	#right-select {
-		position: absolute;
-		top: 10px;
-		right: 10px;
-		float: right;
+		--clearSelectWidth: 40px;
+		--indicatorWidth: 0px;
+		--multiClearWidth: 0px;
+		--spinnerWidth: 0px;
+		--itemPadding: 0px 0px 0px 10px;
+		--itemMargin: 0px;
+		--inputColor: white;
 	}
 
 	
