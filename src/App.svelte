@@ -1,6 +1,9 @@
 <script>
 	import { onMount } from 'svelte';
 	import Top from "./lib/Top.svelte";
+	import Select from 'svelte-select';
+
+
 	import notToronto from "./assets/not_toronto.geo.json"
 
 	import {Map, View} from 'ol';
@@ -23,14 +26,31 @@
 	let load = 0;
 
 	let leftYear = 1965;
-	let leftYearSet = [
-		1954, 1965, 1978, 2011, 2021
+	const leftYearSet = [
+		"1954", "1965", "1978", "2011", "2021"
 	];
 
 	let rightYear = 2021;
 	let rightYearSet = [
 		1954, 1965, 1978, 2011, 2021
 	];
+
+	// let items = [
+    // {value: 'chocolate', label: 'Chocolate'},
+    // {value: 'pizza', label: 'Pizza'},
+    // {value: 'cake', label: 'Cake'},
+    // {value: 'chips', label: 'Chips'},
+    // {value: 'ice-cream', label: 'Ice Cream'},
+	// ];
+
+	let value = {value: 'cake', label: 'Cake'};
+
+	function handleSelect(event) {
+		console.log('selected item', event.detail);
+		// .. do something here 🙂
+	}
+
+
 
 	useGeographic();
 
@@ -136,8 +156,8 @@
 			target: 'map',
 			layers: [leftLayer, rightLayer, vectorLayer],
 			view: new View({
-				center: [-79.39676,43.66],
-				zoom: 13,
+				center: [-79.38,43.67],
+				zoom: 14,
 				maxZoom: 19,
 				minZoom: 12
 			})
@@ -269,7 +289,7 @@
 
 	<div id="left-select">
 
-		<form>
+		<!-- <form>
 			<select bind:value={leftYear} id="select">
 				{#each leftYearSet as year}
 					<option value={year}>
@@ -277,7 +297,9 @@
 					</option>
 				{/each}
 			</select>
-		</form>
+		</form> -->
+
+		<Select items={leftYearSet}></Select>
 
 	</div>
 
@@ -294,8 +316,6 @@
 		</form>
 
 	</div>
-
-	
 
 </main>
 
@@ -346,6 +366,7 @@
 		top: 10px;
 		left: 10px;
 		float: left;
+		width: 100px;
 	}
 
 	#right-select {
@@ -368,7 +389,7 @@
 		line-height: inherit;
 	}
 
-	#select {
+	/* #select {
 		width: 75px;
 		border: 1px solid #F1C500;
 		border-radius: 0.25em;
@@ -377,8 +398,8 @@
 		cursor: pointer;
 		line-height: 1.1;
 		background-color: #fff;
-		/* background-image: linear-gradient(to top, #f9f9f9, #fff 33%); */
-	}
+		background-image: linear-gradient(to top, #f9f9f9, #fff 33%);
+	} */
 
 	#line {
 		position: absolute;
