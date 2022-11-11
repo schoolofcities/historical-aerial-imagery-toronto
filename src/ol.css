@@ -135,12 +135,14 @@
   position: absolute;
   background-color: var(--ol-subtle-background-color);
   border-radius: 4px;
+  z-index: 90;
 }
 
 .ol-zoom {
   position: absolute;
   bottom: 10px;
   left: 10px;
+  z-index: 90;
 }
 
 .ol-rotate {
