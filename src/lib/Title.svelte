@@ -2,7 +2,7 @@
 <div id="container">
 	<div id="bar">
 		<p>
-			Historical Aerial Imagery Toronto.
+			Historical Aerial Imagery Toronto
 		</p>
 	</div>
 </div>

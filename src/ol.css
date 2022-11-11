@@ -26,7 +26,7 @@
   background: var(--ol-partial-background-color);
   border-radius: 4px;
   bottom: 10px;
-  left: 40px;
+  left: 10px;
   padding: 2px;
   position: absolute;
 }
@@ -134,13 +134,13 @@
 .ol-control {
   position: absolute;
   background-color: var(--ol-subtle-background-color);
-  border-radius: 4px;
+  border-radius: 1px;
   z-index: 90;
 }
 
 .ol-zoom {
   position: absolute;
-  bottom: 10px;
+  bottom: 35px;
   left: 10px;
   z-index: 90;
 }
@@ -199,13 +199,13 @@
   will-change: transform;
 }
 
-.ol-touch .ol-control button {
-  font-size: 1.5em;
+/* .ol-touch .ol-control button {
+  font-size: 1.25em;
 }
 
 .ol-touch .ol-zoom-extent {
   top: 5.5em;
-}
+} */
 
 .ol-control button:hover,
 .ol-control button:focus {
@@ -288,7 +288,8 @@
 }
 
 .ol-zoomslider {
-  bottom: 65px;
+  position: absolute;
+  bottom: 87px;
   left: 10px;
   height: 100px;
   background-color: rgba(255, 255, 255, 0.6);
@@ -300,13 +301,13 @@
   border: solid 1px rgb(116, 116, 116);
 }
 
-.ol-touch .ol-zoomslider {
-  top: 5.5em;
-}
+/* .ol-touch .ol-zoomslider {
+  bottom: 5.5em;
+} */
 
 .ol-overviewmap {
   left: 0.5em;
-  bottom: 0.5em;
+  bottom: 65px;
 }
 
 .ol-overviewmap.ol-uncollapsible {
