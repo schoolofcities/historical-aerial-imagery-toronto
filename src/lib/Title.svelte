@@ -2,7 +2,7 @@
 <div id="container">
 	<div id="bar">
 		<p>
-			Historical Aerial Imagery Toronto
+			Historical Aerial Imagery Toronto.
 		</p>
 	</div>
 </div>
@@ -20,7 +20,7 @@
 		height: 25px;
 		border-bottom:1px solid #fff;
         border-top:1px solid #fff;
-		width: 257px;
+		width: 260px;
 		text-align: left;
 		padding-left: 2px;
 		padding-right: 2px;
@@ -33,6 +33,5 @@
 		font-size: 18px;
 		line-height: 14px;
 		color: #fff;
-        
 	}
 </style>

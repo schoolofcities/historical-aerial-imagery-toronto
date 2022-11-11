@@ -345,6 +345,11 @@
 	
 	:global(body) {
 		overflow: hidden;
+		padding: 0px;
+		margin: 0px;
+		height: 100%;
+		width: 100%;
+		position:fixed;
 	}
 
 	main {
@@ -413,23 +418,24 @@
 		width: 4px;
 		background-color: rgb(255, 255, 255);
 		margin: 0px;
-		margin-top: -10px;
-		z-index: 50;
+		margin-top: 0px;
+		z-index: 5;
 	}
 
 	#range {
 		position: absolute;
 		top: calc(100vh / 2.1 );
 		height: 0px;
-		width: calc(100vw + 47px);
-		margin-left: -10px;
-		margin-right: -4px;
+		width: calc(100vw + 45px);
+		margin-left: -35px;
+		margin-right: 40px;
 		z-index: 99;
 	}
 
 	input[type="range"] {
 		height: 0px;
-		margin-left: -22px;
+		margin-left: 12px;
+		margin-right: -22px;
 		pointer-events: none;
 		-webkit-appearance: none; 
 	}
