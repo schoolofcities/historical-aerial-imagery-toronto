@@ -3,7 +3,6 @@
 	import Title from "./lib/Title.svelte";
 	import Information from "./lib/Information.svelte";
 	import Select from 'svelte-select';
-	import Icon from './lib/Icon.svelte';
 
 	import "./ol.css";
 
