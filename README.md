@@ -1,3 +1,3 @@
-## historical-air-photos-toronto
+## historical-aerial-imagery-toronto
 
-https://github.com/schoolofcities/historical-aerial-imagery-toronto
+https://schoolofcities.github.io/historical-aerial-imagery-toronto/
