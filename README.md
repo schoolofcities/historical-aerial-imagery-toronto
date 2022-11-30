@@ -1,6 +1,6 @@
 ## historical-aerial-imagery-toronto
 
-A simple web app for comparing historical aerial imagery in the City of Toronto. Built for teaching and research purposes at the School of Cities, but made openly available for anyone interested in Toronto history.
+A simple web app for comparing historical aerial imagery (i.e. air photos) in the City of Toronto. Built for teaching and research purposes at the School of Cities, but made openly available for anyone interested in Toronto history.
 
 https://schoolofcities.github.io/historical-aerial-imagery-toronto/
 
