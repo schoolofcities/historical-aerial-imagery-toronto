@@ -2,7 +2,7 @@
 <div id="container">
 	<div id="bar">
 		<p>
-			Images on this map were sourced from the <a href="https://open.toronto.ca/dataset/web-map-services/" target="_blank">City of Toronto's Open Data</a> portal. This web page was built by <a href="http://jamaps.github.io/" target="_blank">Jeff Allen</a> at the <a href="https://www.schoolofcities.utoronto.ca/" target="_blank">School of Cities</a>. Source code is on <a href="https://github.com/schoolofcities/historical-aerial-imagery-toronto" target="_blank">GitHub</a>.
+			Images on this map were sourced from the <a href="https://open.toronto.ca/dataset/web-map-services/" target="_blank">City of Toronto's Open Data</a> portal. This web page was built by <a href="http://jamaps.github.io/" target="_blank">Jeff Allen</a> at the <a href="https://www.schoolofcities.utoronto.ca/" target="_blank">School of Cities</a>. Imagery data sources and code for building this page are on <a href="https://github.com/schoolofcities/historical-aerial-imagery-toronto" target="_blank">GitHub</a>.
 		</p>
 	</div>
 </div>
