@@ -6,7 +6,7 @@ https://schoolofcities.github.io/historical-aerial-imagery-toronto/
 
 ### Data Sources:
 
-As of now, images for all years are sourced from the [City of Toronto](https://open.toronto.ca/dataset/web-map-services/). These are shared as WMTS (Web Map Tiled Services)
+As of now, images for all years are sourced from the [City of Toronto](https://open.toronto.ca/dataset/web-map-services/). These are shared as WMTS (Web Map Tiled Services):
 
 - [1954](https://gis.toronto.ca/arcgis/rest/services/basemap/cot_historic_aerial_1954/MapServer/WMTS/)
 
