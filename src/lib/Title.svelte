@@ -15,7 +15,7 @@
 	#bar {
 		opacity: 0.95;
 		position: absolute;
-   		bottom: 80px;
+   		bottom: 56px;
 		right: 10px;
 		height: 25px;
 		border-bottom:1px solid #fff;
