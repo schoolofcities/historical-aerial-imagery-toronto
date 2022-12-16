@@ -14,6 +14,7 @@
 	import {getRenderPixel} from 'ol/render';
 	import {useGeographic} from 'ol/proj';
 	import WMTS from 'ol/source/WMTS';
+	import XYZ from 'ol/source/XYZ';
 	import WMTSTileGrid from 'ol/tilegrid/WMTS';
 	import {get as getProjection} from 'ol/proj';
 	import {getWidth} from 'ol/extent';
@@ -123,15 +124,19 @@
 	
 	var leftLayer = new TileLayer({
 			opacity: 1,
-			source: new WMTS({
-				url: sources[leftYear]['url'],
-				layer: sources[leftYear]['layer'],
-				matrixSet: sources[leftYear]['matrixSet'],
-				format: 'image/jpg',
-				projection: 'EPSG:3857',
-				tileGrid: tileGrid,
-				style: 'default'
+			source: new XYZ({
+				url:
+				'../data/1947/tiles/{z}/{x}/{y}.png'
 			})
+			// source: new WMTS({
+			// 	url: sources[leftYear]['url'],
+			// 	layer: sources[leftYear]['layer'],
+			// 	matrixSet: sources[leftYear]['matrixSet'],
+			// 	format: 'image/jpg',
+			// 	projection: 'EPSG:3857',
+			// 	tileGrid: tileGrid,
+			// 	style: 'default'
+			// })
 		});
 
 	var rightLayer = new TileLayer({
