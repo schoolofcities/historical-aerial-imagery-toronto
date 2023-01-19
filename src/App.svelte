@@ -35,7 +35,7 @@
 
 	let leftYear = 1965;
 	const leftYearSet = [
-		1954, 1965, 1978, 2011, 2021
+		1947, 1954, 1965, 1978, 2011, 2021
 	];
 	function handleSelectLeft(event) {
 		console.log('selected item', event.detail);
@@ -72,26 +72,31 @@
 
 	const sources = {
 		'1954': {
+			'type': 'WMTS',
 			'url': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_historic_aerial_1954/MapServer/WMTS/',
 			'layer': 'basemap_cot_historic_aerial_1954',
 			'matrixSet': 'default028mm'
 		},
 		'1965': {
+			'type': 'WMTS',
 			'url': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_historic_aerial_1965/MapServer/WMTS/',
 			'layer': 'basemap_cot_historic_aerial_1965',
 			'matrixSet': 'default028mm'
 		},
 		'1978': {
+			'type': 'WMTS',
 			'url': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_historic_aerial_1978/MapServer/WMTS/',
 			'layer': 'basemap_cot_historic_aerial_1978',
 			'matrixSet': 'default028mm'
 		},
 		'2011': {
+			'type': 'WMTS',
 			'url': 'https://gis.toronto.ca/arcgis/rest/services/primary/cot_ortho_2011_color_10cm_webm/MapServer/WMTS/',
 			'layer': 'primary_cot_ortho_2011_color_10cm_webm',
 			'matrixSet': 'default028mm'
 		},
 		'2021': {
+			'type': 'WMTS',
 			'url': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho/MapServer/WMTS',
 			'layer': 'basemap_cot_ortho',
 			'matrixSet': 'default028mm'
@@ -119,8 +124,7 @@
 		var vectorLayer = new VectorLayer({
 			source: vectorSource,
 			style: style
-		});
-		
+		});		
 	
 	var leftLayer = new TileLayer({
 			opacity: 1,
