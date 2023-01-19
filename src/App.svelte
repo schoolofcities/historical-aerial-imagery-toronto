@@ -33,7 +33,7 @@
 	let map = 0;
 	let load = 0;
 
-	let leftYear = 1965;
+	let leftYear = 1947;
 	const leftYearSet = [
 		1947, 1954, 1965, 1978, 2011, 2021
 	];
@@ -44,7 +44,7 @@
 
 	let rightYear = 2021;
 	let rightYearSet = [
-		1954, 1965, 1978, 2011, 2021
+		1947, 1954, 1965, 1978, 2011, 2021
 	];
 	function handleSelectRight(event) {
 		console.log('selected item', event.detail);
@@ -126,21 +126,28 @@
 			style: style
 		});		
 	
+	var leftSource;
+	if (leftYear !== 1947) {
+		leftSource = new WMTS({
+			url: sources[leftYear]['url'],
+			layer: sources[leftYear]['layer'],
+			matrixSet: sources[leftYear]['matrixSet'],
+			format: 'image/jpg',
+			projection: 'EPSG:3857',
+			tileGrid: tileGrid,
+			style: 'default'
+		});
+	} else {
+		console.log("moo");
+		leftSource = new XYZ({
+			url:
+			'../data/1947/tiles/{z}/{x}/{y}.png'
+		});
+	}
+
 	var leftLayer = new TileLayer({
 			opacity: 1,
-			source: new XYZ({
-				url:
-				'../data/1947/tiles/{z}/{x}/{y}.png'
-			})
-			// source: new WMTS({
-			// 	url: sources[leftYear]['url'],
-			// 	layer: sources[leftYear]['layer'],
-			// 	matrixSet: sources[leftYear]['matrixSet'],
-			// 	format: 'image/jpg',
-			// 	projection: 'EPSG:3857',
-			// 	tileGrid: tileGrid,
-			// 	style: 'default'
-			// })
+			source: leftSource
 		});
 
 	var rightLayer = new TileLayer({
@@ -166,7 +173,7 @@
 			view: new View({
 				center: [-79.38,43.67],
 				zoom: 14,
-				maxZoom: 19,
+				maxZoom: 18.99,
 				minZoom: 12,
 				extent: [-79.8302,43.3046,-78.9160,44.0295],
 			}),
@@ -209,15 +216,13 @@
 
 	function layerSwitch() {
 		if (load > 0) {
-			console.log(leftYear)
-			console.log("meow")
 
 			map.removeLayer(leftLayer);
 			map.removeLayer(rightLayer);
 
-			leftLayer = new TileLayer({
-				opacity: 1,
-				source: new WMTS({
+			var leftSource;
+			if (leftYear !== 1947) {
+				leftSource = new WMTS({
 					url: sources[leftYear]['url'],
 					layer: sources[leftYear]['layer'],
 					matrixSet: sources[leftYear]['matrixSet'],
@@ -225,13 +230,24 @@
 					projection: 'EPSG:3857',
 					tileGrid: tileGrid,
 					style: 'default'
-				})
+				});
+			} else {
+				console.log("moo");
+				leftSource = new XYZ({
+					url:
+					'../data/1947/tiles/{z}/{x}/{y}.png'
+				});
+			}
+
+			leftLayer = new TileLayer({
+				opacity: 1,
+				source: leftSource
 			});
 			map.addLayer(leftLayer);
 
-			rightLayer = new TileLayer({
-				opacity: 1,
-				source: new WMTS({
+			var rightSource;
+			if (rightYear !== 1947) {
+				rightSource = new WMTS({
 					url: sources[rightYear]['url'],
 					layer: sources[rightYear]['layer'],
 					matrixSet: sources[rightYear]['matrixSet'],
@@ -239,7 +255,18 @@
 					projection: 'EPSG:3857',
 					tileGrid: tileGrid,
 					style: 'default'
-				})
+				});
+			} else {
+				console.log("moo");
+				rightSource = new XYZ({
+					url:
+					'../data/1947/tiles/{z}/{x}/{y}.png'
+				});
+			}
+
+			rightLayer = new TileLayer({
+				opacity: 1,
+				source: rightSource
 			});
 			map.addLayer(rightLayer);
 
@@ -311,7 +338,7 @@
 
 		<Select 
 			items={leftYearSet} 
-			value="1965"
+			value="1947"
 			isSearchable={false}
 			isClearable={false}
 			on:select={handleSelectLeft}
