@@ -141,7 +141,7 @@
 		console.log("moo");
 		leftSource = new XYZ({
 			url:
-			'../data/1947/tiles/{z}/{x}/{y}.png'
+			'https://maps.library.utoronto.ca/tiles1947/{z}/{x}/{y}.png'
 		});
 	}
 
@@ -171,8 +171,8 @@
 			target: 'map',
 			layers: [leftLayer, rightLayer, vectorLayer],
 			view: new View({
-				center: [-79.38,43.67],
-				zoom: 14,
+				center: [-79.3792,43.6450],
+				zoom: 16,
 				maxZoom: 18.99,
 				minZoom: 12,
 				extent: [-79.8302,43.3046,-78.9160,44.0295],
@@ -235,7 +235,7 @@
 				console.log("moo");
 				leftSource = new XYZ({
 					url:
-					'../data/1947/tiles/{z}/{x}/{y}.png'
+					'https://maps.library.utoronto.ca/tiles1947/{z}/{x}/{y}.png'
 				});
 			}
 
@@ -260,7 +260,7 @@
 				console.log("moo");
 				rightSource = new XYZ({
 					url:
-					'../data/1947/tiles/{z}/{x}/{y}.png'
+					'https://maps.library.utoronto.ca/tiles1947/{z}/{x}/{y}.png'
 				});
 			}
 
