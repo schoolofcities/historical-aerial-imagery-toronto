@@ -28,7 +28,6 @@
 	import {ScaleLine} from 'ol/control';
 
 	let labels = false;
-	$: console.log(labels);
 
 	let lineBreak = 50;
 	let pageWidth = 420;
@@ -160,6 +159,15 @@
         	return textStyle;
       	},		
 	});
+
+	$: if (labels) {
+		console.log("meow on");
+		streetLayer.setOpacity(1);
+	} else {
+		console.log("meow off");
+		streetLayer.setOpacity(0);
+	}
+
 
 
 
@@ -341,6 +349,8 @@
 
 	$: lineLeft = parseInt(pageWidth * (lineBreak / 100) -2 );
 
+
+	
 </script>
 
 
@@ -366,9 +376,13 @@
 		<div id="label-bar">
 			<p>
 				<label>
-					<input type=checkbox bind:checked={labels}>
-					Show Labels
+					<input 
+					type=checkbox 
+					bind:checked={labels}
+					on:select={handleSelectRight}
+					> Show Labels (based on 2022 data)
 				</label>
+				
 			</p>
 		</div>
 	</div>
@@ -475,11 +489,22 @@
 		z-index: 99;
 	}
 	#label-bar p {
-		margin: 5px;
+		margin: 3px;
+		margin-left: 4px;
+		
 		font-family: Roboto, sans-serif;
 		font-size: 11px;
 		line-height: 14px;
 		color: #5a5a5a
+	}
+	input[type=checkbox] {
+		padding: 0px;
+		margin: 0px;
+		width: 11px;
+        height: 11px;
+	}
+	input[type=checkbox]:hover {
+		cursor: pointer;
 	}
 
 	#left-select {
