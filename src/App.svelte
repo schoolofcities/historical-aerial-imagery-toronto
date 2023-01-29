@@ -27,6 +27,8 @@
 	import {defaults as defaultControls} from 'ol/control';
 	import {ScaleLine} from 'ol/control';
 
+	let labels = false;
+	$: console.log(labels);
 
 	let lineBreak = 50;
 	let pageWidth = 420;
@@ -135,7 +137,7 @@
 	var textStyle = new Style({
 		text: new Text({
 				declutter: true,
-				font: 'bold 12px "Open Sans", "Arial Unicode MS", "sans-serif"',
+				font: 'bold 12px "Roboto", "Arial Unicode MS", "sans-serif"',
 				placement: 'line',
 				// padding: [540,540,540,540],
 				// overflow: true,
@@ -360,6 +362,17 @@
 
 	<Information/>
 
+	<div id="label-container">
+		<div id="label-bar">
+			<p>
+				<label>
+					<input type=checkbox bind:checked={labels}>
+					Show Labels
+				</label>
+			</p>
+		</div>
+	</div>
+
 	<div id="line" style="left: {lineLeft}px" ></div>
 
 
@@ -440,6 +453,33 @@
 		position: absolute;
 		z-index: 1;
 		margin: 0px;
+	}
+
+	#label-container {
+		display: flex;
+		justify-content: center;
+	}
+	#label-bar {
+		opacity: 0.95;
+		position: absolute;
+   		bottom: 5px;
+		right: 10px;
+		height: 20px;
+		background-color: #fff;
+		border:1px solid #c8c8c8;
+		border-right: 2px solid #0D534D;
+		width: 257px;
+		text-align: left;
+		padding-left: 2px;
+		padding-right: 2px;
+		z-index: 99;
+	}
+	#label-bar p {
+		margin: 5px;
+		font-family: Roboto, sans-serif;
+		font-size: 11px;
+		line-height: 14px;
+		color: #5a5a5a
 	}
 
 	#left-select {
