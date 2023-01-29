@@ -7,10 +7,11 @@
 	import "./ol.css";
 
 	import notToronto from "./assets/not_toronto.geo.json"
+	import majorStreets from "./assets/major-streets-split.geo.json"
 
 	import {Map, View} from 'ol';
 	import TileLayer from 'ol/layer/Tile';
-	import {Fill, Stroke, Style} from 'ol/style';
+	import {Fill, Stroke, Style, Text} from 'ol/style';
 	import {getRenderPixel} from 'ol/render';
 	import {useGeographic} from 'ol/proj';
 	import WMTS from 'ol/source/WMTS';
@@ -106,26 +107,60 @@
 
 	var features = new GeoJSON().readFeatures(notToronto, {
 		});
+	var vectorSource = new VectorSource({
+		features
+	});
+	const style = new Style({
+		fill: new Fill({
+			color: '#fff',
+		}),
+		stroke: new Stroke({
+			color: '#0D534D',
+			width: 2
+		})
+	});
+	var vectorLayer = new VectorLayer({
+		source: vectorSource,
+		style: style
+	});
 
-		var vectorSource = new VectorSource({
-			features
-		});
-
-		const style = new Style({
-			fill: new Fill({
-				color: '#fff',
-			}),
-			stroke: new Stroke({
-				color: '#0D534D',
-				width: 2
-			})
-		});
-
-		var vectorLayer = new VectorLayer({
-			source: vectorSource,
-			style: style
-		});		
 	
+	var features = new GeoJSON().readFeatures(majorStreets, {
+		});
+	var vectorSource = new VectorSource({
+		features
+	});
+
+	
+	var textStyle = new Style({
+		text: new Text({
+				declutter: true,
+				font: 'bold 12px "Open Sans", "Arial Unicode MS", "sans-serif"',
+				placement: 'line',
+				// padding: [540,540,540,540],
+				// overflow: true,
+				scale: 1,
+				fill: new Fill({
+					color: '#0D534D',
+				}),
+				stroke: new Stroke({
+					color: 'white',
+					width: 2
+				})
+			}),
+		});
+
+	var streetLayer = new VectorLayer({
+		declutter: true,
+		source: vectorSource,
+		style: function (feature) {
+			textStyle.getText().setText(feature.get('n'));
+        	return textStyle;
+      	},		
+	});
+
+
+
 	var leftSource;
 	if (leftYear !== 1947) {
 		leftSource = new WMTS({
@@ -169,9 +204,9 @@
 
 		map = new Map({
 			target: 'map',
-			layers: [leftLayer, rightLayer, vectorLayer],
+			layers: [leftLayer, rightLayer, vectorLayer, streetLayer],
 			view: new View({
-				center: [-79.3792,43.6450],
+				center: [-79.3791,43.6450],
 				zoom: 16,
 				maxZoom: 18.99,
 				minZoom: 12,
