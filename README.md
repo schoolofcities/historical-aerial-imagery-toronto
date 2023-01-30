@@ -20,3 +20,4 @@ Images for all other years are sourced from the [City of Toronto](https://open.t
 
 - [2021](https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho/MapServer/WMTS)
 
+Labels on the maps are derived from the City of Toronto's [Centerline](https://open.toronto.ca/dataset/toronto-centreline-tcl/) data.
