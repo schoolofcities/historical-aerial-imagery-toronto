@@ -380,7 +380,7 @@
 					type=checkbox 
 					bind:checked={labels}
 					on:select={handleSelectRight}
-					> Show Labels (based on 2022 data)
+					> Show Labels (based on 2022 street data)
 				</label>
 				
 			</p>
