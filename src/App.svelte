@@ -161,10 +161,8 @@
 	});
 
 	$: if (labels) {
-		console.log("meow on");
 		streetLayer.setOpacity(1);
 	} else {
-		console.log("meow off");
 		streetLayer.setOpacity(0);
 	}
 
@@ -183,7 +181,6 @@
 			style: 'default'
 		});
 	} else {
-		console.log("moo");
 		leftSource = new XYZ({
 			url:
 			'https://maps.library.utoronto.ca/tiles1947/{z}/{x}/{y}.png'
