@@ -35,9 +35,9 @@
 	let map = 0;
 	let load = 0;
 
-	let leftYear = 1947;
+	let leftYear = 1939;
 	const leftYearSet = [
-		1947, 1954, 1965, 1978, 2011, 2021
+		1939, 1947, 1954, 1965, 1978, 2011, 2021
 	];
 	function handleSelectLeft(event) {
 		console.log('selected item', event.detail);
@@ -73,6 +73,12 @@
 	});
 
 	const sources = {
+		'1939': {
+			'type': 'WMTS',
+			'url': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_historic_aerial_1939/MapServer/WMTS/',
+			'layer': 'basemap_cot_historic_aerial_1939',
+			'matrixSet': 'default028mm'
+		},
 		'1954': {
 			'type': 'WMTS',
 			'url': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_historic_aerial_1954/MapServer/WMTS/',
