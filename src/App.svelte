@@ -7,6 +7,7 @@
 	import "./ol.css";
 
 	import notToronto from "./assets/not_toronto.geo.json"
+	import missing1939 from "./assets/missing1939.geo.json"
 	import majorStreets from "./assets/major-streets-split.geo.json"
 
 	import {Map, View} from 'ol';
