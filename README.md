@@ -10,6 +10,8 @@ Imagery for [1947](https://mdl.library.utoronto.ca/collections/geospatial-data/t
 
 Images for all other years are sourced from the [City of Toronto](https://open.toronto.ca/dataset/web-map-services/). These are shared as WMTS (Web Map Tiled Services):
 
+- [1939](https://gis.toronto.ca/arcgis/rest/services/basemap/cot_historic_aerial_1939/MapServer/WMTS/). (we blacked out a significant portion of the imagery that was not geo-referenced properly)
+
 - [1954](https://gis.toronto.ca/arcgis/rest/services/basemap/cot_historic_aerial_1954/MapServer/WMTS/)
 
 - [1965](https://gis.toronto.ca/arcgis/rest/services/basemap/cot_historic_aerial_1965/MapServer/WMTS/)
