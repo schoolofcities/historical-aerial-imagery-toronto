@@ -8,9 +8,7 @@ https://schoolofcities.github.io/historical-aerial-imagery-toronto/
 
 Imagery for [1947](https://mdl.library.utoronto.ca/collections/geospatial-data/toronto-aerial-photographs-1947-black-and-white-and-colourized) comes from the University of Toronto's Map and Data Library. We additionally processed these by clipping and combining them into a single raster tile package.
 
-Images for all other years are sourced from the [City of Toronto](https://open.toronto.ca/dataset/web-map-services/). These are shared as WMTS (Web Map Tiled Services). Note that for 1939 we blacked-out a significant portion of the imagery that was not geo-referenced properly.
-
-- [1939](https://gis.toronto.ca/arcgis/rest/services/basemap/cot_historic_aerial_1939/MapServer/WMTS/) 
+Images for all other years are sourced from the [City of Toronto](https://open.toronto.ca/dataset/web-map-services/). These are shared as WMTS (Web Map Tiled Services):
 
 - [1954](https://gis.toronto.ca/arcgis/rest/services/basemap/cot_historic_aerial_1954/MapServer/WMTS/)
 
