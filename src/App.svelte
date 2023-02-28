@@ -36,7 +36,7 @@
 	let map = 0;
 	let load = 0;
 
-	let leftYear = 1939;
+	let leftYear = 1947;
 	const leftYearSet = [
 		1939, 1947, 1954, 1965, 1978, 2011, 2021
 	];
@@ -47,7 +47,7 @@
 
 	let rightYear = 2021;
 	let rightYearSet = [
-		1947, 1954, 1965, 1978, 2011, 2021
+		1939, 1947, 1954, 1965, 1978, 2011, 2021
 	];
 	function handleSelectRight(event) {
 		console.log('selected item', event.detail);
@@ -246,6 +246,7 @@
 
 		map = new Map({
 			target: 'map',
+			// layers: [leftLayer, rightLayer, notTorontoLayer, streetLayer],
 			layers: [leftLayer, missing1939LayerLeft, rightLayer, missing1939LayerRight, notTorontoLayer, streetLayer],
 			view: new View({
 				center: [-79.3791,43.6450],
@@ -322,6 +323,14 @@
 			});
 			map.addLayer(leftLayer);
 
+			map.removeLayer(missing1939LayerLeft);
+			map.addLayer(missing1939LayerLeft);
+			if (leftYear === 1939) {
+				missing1939LayerLeft.setOpacity(1);
+			} else {
+				missing1939LayerLeft.setOpacity(0);
+			}
+
 			var rightSource;
 			if (rightYear !== 1947) {
 				rightSource = new WMTS({
@@ -371,8 +380,10 @@
 				ctx.restore();
 			});
 
-			map.removeLayer(vectorLayer);
-			map.addLayer(vectorLayer);
+			map.removeLayer(notTorontoLayer);
+			map.addLayer(notTorontoLayer);
+
+			
 		}
 	}
 
