@@ -36,7 +36,7 @@
 	let map = 0;
 	let load = 0;
 
-	let leftYear = 1947;
+	let leftYear = 1939;
 	const leftYearSet = [
 		1939, 1947, 1954, 1965, 1978, 2011, 2021
 	];
@@ -47,7 +47,7 @@
 
 	let rightYear = 2021;
 	let rightYearSet = [
-		1939, 1947, 1954, 1965, 1978, 2011, 2021
+		1947, 1954, 1965, 1978, 2011, 2021
 	];
 	function handleSelectRight(event) {
 		console.log('selected item', event.detail);
@@ -380,9 +380,16 @@
 				ctx.restore();
 			});
 
+			// map.removeLayer(missing1939LayerRight);
+			// map.addLayer(missing1939LayerRight);
+			// if (rightYear === 1939) {
+			// 	missing1939LayerRight.setOpacity(1);
+			// } else {
+			// 	missing1939LayerRight.setOpacity(0);
+			// }
+
 			map.removeLayer(notTorontoLayer);
 			map.addLayer(notTorontoLayer);
-
 			
 		}
 	}
