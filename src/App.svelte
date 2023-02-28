@@ -7,6 +7,7 @@
 	import "./ol.css";
 
 	import notToronto from "./assets/not_toronto.geo.json"
+	import missing1939 from "./assets/missing1939.geo.json"
 	import majorStreets from "./assets/major-streets-split.geo.json"
 
 	import {Map, View} from 'ol';
@@ -35,9 +36,9 @@
 	let map = 0;
 	let load = 0;
 
-	let leftYear = 1947;
+	let leftYear = 1939;
 	const leftYearSet = [
-		1947, 1954, 1965, 1978, 2011, 2021
+		1939, 1947, 1954, 1965, 1978, 2011, 2021
 	];
 	function handleSelectLeft(event) {
 		console.log('selected item', event.detail);
@@ -73,6 +74,12 @@
 	});
 
 	const sources = {
+		'1939': {
+			'type': 'WMTS',
+			'url': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_historic_aerial_1939/MapServer/WMTS/',
+			'layer': 'basemap_cot_historic_aerial_1939',
+			'matrixSet': 'default028mm'
+		},
 		'1954': {
 			'type': 'WMTS',
 			'url': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_historic_aerial_1954/MapServer/WMTS/',
@@ -120,10 +127,40 @@
 			width: 2
 		})
 	});
-	var vectorLayer = new VectorLayer({
+	var notTorontoLayer = new VectorLayer({
 		source: vectorSource,
 		style: style
 	});
+
+
+
+	var features = new GeoJSON().readFeatures(missing1939, {
+		});
+	var vectorSource = new VectorSource({
+		features
+	});
+	const missingStyleLeft = new Style({
+		fill: new Fill({
+			color: '#fcfcfc',
+		})
+	});
+	const missingStyleRight = new Style({
+		fill: new Fill({
+			color: '#fcfcfc',
+		})
+	});
+	var missing1939LayerLeft = new VectorLayer({
+		source: vectorSource,
+		style: missingStyleLeft,
+		opacity: 1
+	});
+	var missing1939LayerRight = new VectorLayer({
+		source: vectorSource,
+		style: missingStyleRight,
+		opacity: 0
+	});
+
+
 
 	
 	var features = new GeoJSON().readFeatures(majorStreets, {
@@ -165,8 +202,6 @@
 	} else {
 		streetLayer.setOpacity(0);
 	}
-
-
 
 
 	var leftSource;
@@ -211,7 +246,8 @@
 
 		map = new Map({
 			target: 'map',
-			layers: [leftLayer, rightLayer, vectorLayer, streetLayer],
+			// layers: [leftLayer, rightLayer, notTorontoLayer, streetLayer],
+			layers: [leftLayer, missing1939LayerLeft, rightLayer, missing1939LayerRight, notTorontoLayer, streetLayer],
 			view: new View({
 				center: [-79.3791,43.6450],
 				zoom: 16,
@@ -287,6 +323,14 @@
 			});
 			map.addLayer(leftLayer);
 
+			map.removeLayer(missing1939LayerLeft);
+			map.addLayer(missing1939LayerLeft);
+			if (leftYear === 1939) {
+				missing1939LayerLeft.setOpacity(1);
+			} else {
+				missing1939LayerLeft.setOpacity(0);
+			}
+
 			var rightSource;
 			if (rightYear !== 1947) {
 				rightSource = new WMTS({
@@ -336,8 +380,17 @@
 				ctx.restore();
 			});
 
-			map.removeLayer(vectorLayer);
-			map.addLayer(vectorLayer);
+			// map.removeLayer(missing1939LayerRight);
+			// map.addLayer(missing1939LayerRight);
+			// if (rightYear === 1939) {
+			// 	missing1939LayerRight.setOpacity(1);
+			// } else {
+			// 	missing1939LayerRight.setOpacity(0);
+			// }
+
+			map.removeLayer(notTorontoLayer);
+			map.addLayer(notTorontoLayer);
+			
 		}
 	}
 
@@ -397,7 +450,7 @@
 
 		<Select 
 			items={leftYearSet} 
-			value="1947"
+			value="1939"
 			isSearchable={false}
 			isClearable={false}
 			on:select={handleSelectLeft}
@@ -576,13 +629,12 @@
 	
 
 	input[type=range]:focus {
-		outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
+		outline: none;
 		}
 
 	input[type=range]::-ms-track {
 		width: 100%;
 		cursor: pointer;
-
 		/* Hides the slider so custom styles can be added */
 		background: transparent; 
 		border-color: transparent;
@@ -597,7 +649,6 @@
 	input[type="range"]::-webkit-slider-thumb {
 		-webkit-appearance: none;
 		pointer-events:auto;
-		/* overflow: hidden; */
 		height: 45px;
 		width: 45px;
 		background-color: white;
@@ -605,7 +656,6 @@
 		border: 2px solid white;
 		cursor: grab;
 		background-image: url('./assets/arrows.svg');
-		/* margin-top: -15px; */
 	}
 
 	input[type="range"]::-webkit-slider-thumb:hover {
