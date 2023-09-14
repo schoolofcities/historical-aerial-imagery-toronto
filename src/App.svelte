@@ -38,7 +38,9 @@
 
 	let leftYear = 1939;
 	const leftYearSet = [
-		1939, 1947, 1954, 1965, 1978, 2011, 2021
+		1939, 1947, 1954, 1965, 1978, 2005, 2009, 
+		//2011, 
+		2018, 2021
 	];
 	function handleSelectLeft(event) {
 		console.log('selected item', event.detail);
@@ -47,7 +49,9 @@
 
 	let rightYear = 2021;
 	let rightYearSet = [
-		1947, 1954, 1965, 1978, 2011, 2021
+		1947, 1954, 1965, 1978, 2005, 2009, 
+		//2011, 
+		2018, 2021
 	];
 	function handleSelectRight(event) {
 		console.log('selected item', event.detail);
@@ -98,12 +102,34 @@
 			'layer': 'basemap_cot_historic_aerial_1978',
 			'matrixSet': 'default028mm'
 		},
-		'2011': {
+		'2005': {
 			'type': 'WMTS',
-			'url': 'https://gis.toronto.ca/arcgis/rest/services/primary/cot_ortho_2011_color_10cm_webm/MapServer/WMTS/',
-			'layer': 'primary_cot_ortho_2011_color_10cm_webm',
+			'url': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho_2005_color_20cm/MapServer/WMTS/',
+			'layer': 'basemap_cot_ortho_2005_color_20cm',
+			'matrixSet': 'default028mm'
+
+		},
+		'2009': {
+			'type': 'WMTS',
+			'url': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho_2009_color_10cm/MapServer/WMTS?',
+			'layer': 'basemap_cot_ortho_2009_color_10cm',
 			'matrixSet': 'default028mm'
 		},
+
+		// '2011': {
+		// 	'type': 'WMTS',
+		// 	'url': 'https://gis.toronto.ca/arcgis/rest/services/primary/cot_ortho_2011_color_10cm_webm/MapServer/WMTS/',
+		// 	'layer': 'primary_cot_ortho_2011_color_10cm_webm',
+		// 	'matrixSet': 'default028mm'
+		// },
+
+		'2018': {
+			'type': 'WMTS',
+			'url': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho_2018_color_8cm/MapServer/WMTS?',
+			'layer': 'basemap_cot_ortho_2018_color_8cm',
+			'matrixSet': 'default028mm'
+		},
+		
 		'2021': {
 			'type': 'WMTS',
 			'url': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho/MapServer/WMTS',
