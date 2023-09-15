@@ -18,7 +18,13 @@ Images for all other years are sourced from the [City of Toronto](https://open.t
 
 - [1978](https://gis.toronto.ca/arcgis/rest/services/basemap/cot_historic_aerial_1978/MapServer/WMTS/)
 
-- [2011](https://gis.toronto.ca/arcgis/rest/services/primary/cot_ortho_2011_color_10cm_webm/MapServer/WMTS/)
+- [2005](https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho_2005_color_20cm/MapServer/WMTS/)
+
+- [2009](https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho_2009_color_10cm/MapServer/WMTS/)
+
+<!-- - [2011](https://gis.toronto.ca/arcgis/rest/services/primary/cot_ortho_2011_color_10cm_webm/MapServer/WMTS/) -->
+
+- [2018](https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho_2018_color_8cm/MapServer/WMTS/)
 
 - [2021](https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho/MapServer/WMTS)
 
