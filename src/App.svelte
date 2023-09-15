@@ -587,6 +587,7 @@
 		position: absolute;
 		top: 10px;
 		left: 10px;
+		max-height: 200px;
 		float: left;
 	}
 
@@ -614,6 +615,7 @@
 		--itemIsActiveBG: #0D534D;
 		--listBorderRadius: 0px;
 		--itemFirstBorderRadius: 0px;
+		--listMaxHeight: 300px;
 		--itemPadding: 0px 0px 0px 10px;
 		--itemMargin: 0px;
 		--inputColor: white;
