@@ -36,22 +36,22 @@
 	let map = 0;
 	let load = 0;
 
-	let leftYear = 1939;
+	let leftYear = 1947;
 	const leftYearSet = [
 		1939, 1947, 1954, 1965, 1978, 2005, 2009, 
 		//2011, 
-		2018, 2021
+		2018, 2022
 	];
 	function handleSelectLeft(event) {
 		console.log('selected item', event.detail);
 		leftYear = event.detail.value
 	}
 
-	let rightYear = 2021;
+	let rightYear = 2022;
 	let rightYearSet = [
 		1947, 1954, 1965, 1978, 2005, 2009, 
 		//2011, 
-		2018, 2021
+		2018, 2022
 	];
 	function handleSelectRight(event) {
 		console.log('selected item', event.detail);
@@ -130,9 +130,9 @@
 			'matrixSet': 'default028mm'
 		},
 		
-		'2021': {
+		'2022': {
 			'type': 'WMTS',
-			'url': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho/MapServer/WMTS',
+			'url': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho_2022_color_8cm/MapServer/WMTS',
 			'layer': 'basemap_cot_ortho',
 			'matrixSet': 'default028mm'
 		},
@@ -476,7 +476,7 @@
 
 		<Select 
 			items={leftYearSet} 
-			value="1939"
+			value="1947"
 			isSearchable={false}
 			isClearable={false}
 			on:select={handleSelectLeft}
@@ -489,7 +489,7 @@
 
 		<Select 
 			items={rightYearSet} 
-			value="2021"
+			value="2022"
 			isSearchable={false}
 			isClearable={false}
 			on:select={handleSelectRight}
