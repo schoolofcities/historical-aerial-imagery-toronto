@@ -36,7 +36,7 @@
 	let map = 0;
 	let load = 0;
 
-	let leftYear = 1939;
+	let leftYear = 1939; 
 	const leftYearSet = [
 		1939, 1947, 1954, 1965, 1978, 2005, 2009, 
 		//2011, 
@@ -476,7 +476,7 @@
 
 		<Select 
 			items={leftYearSet} 
-			value="1947"
+			value="1939"
 			isSearchable={false}
 			isClearable={false}
 			on:select={handleSelectLeft}
