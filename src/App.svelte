@@ -36,7 +36,7 @@
 	let map = 0;
 	let load = 0;
 
-	let leftYear = 1947;
+	let leftYear = 1939;
 	const leftYearSet = [
 		1939, 1947, 1954, 1965, 1978, 2005, 2009, 
 		//2011, 
