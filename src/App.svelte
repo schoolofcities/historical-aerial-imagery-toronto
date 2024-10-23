@@ -36,20 +36,26 @@
 	let map = 0;
 	let load = 0;
 
-	let leftYear = 1939; 
+	let leftYear = 1985; 
 	const leftYearSet = [
-		1939, 1947, 1954, 1965, 1978, 2005, 2009, 
-		//2011, 
+		1939, 1947, 1954, 1965, 1978, 
+		1985,
+		2005, 2009, 
+		// 2011, 
 		2018, 2022
 	];
 	function handleSelectLeft(event) {
 		console.log('selected item', event.detail);
 		leftYear = event.detail.value
 	}
+	$: console.log(leftYear);
+
 
 	let rightYear = 2022;
 	let rightYearSet = [
-		1947, 1954, 1965, 1978, 2005, 2009, 
+		1947, 1954, 1965, 1978, 
+		1985,
+		2005, 2009, 
 		//2011, 
 		2018, 2022
 	];
@@ -57,6 +63,7 @@
 		console.log('selected item', event.detail);
 		rightYear = event.detail.value
 	}
+
 
 
 	useGeographic();
@@ -231,7 +238,18 @@
 
 
 	var leftSource;
-	if (leftYear !== 1947) {
+	if (leftYear === 1947) {
+		leftSource = new XYZ({
+			url:
+			'https://maps.library.utoronto.ca/tiles1947/{z}/{x}/{y}.png'
+		});
+	} else if (leftYear === 1985) {
+		leftSource = new XYZ({
+			url:
+			'https://maps.library.utoronto.ca/tiles1985/{z}/{x}/{y}.png'
+		});
+	}
+	else {
 		leftSource = new WMTS({
 			url: sources[leftYear]['url'],
 			layer: sources[leftYear]['layer'],
@@ -240,11 +258,6 @@
 			projection: 'EPSG:3857',
 			tileGrid: tileGrid,
 			style: 'default'
-		});
-	} else {
-		leftSource = new XYZ({
-			url:
-			'https://maps.library.utoronto.ca/tiles1947/{z}/{x}/{y}.png'
 		});
 	}
 
@@ -272,11 +285,11 @@
 
 		map = new Map({
 			target: 'map',
-			// layers: [leftLayer, rightLayer, notTorontoLayer, streetLayer],
-			layers: [leftLayer, missing1939LayerLeft, rightLayer, missing1939LayerRight, notTorontoLayer, streetLayer],
+			layers: [leftLayer, rightLayer, notTorontoLayer, streetLayer],
+			// layers: [leftLayer, missing1939LayerLeft, rightLayer, missing1939LayerRight, notTorontoLayer, streetLayer],
 			view: new View({
-				center: [-79.3791,43.6450],
-				zoom: 16,
+				center: [-79.3859,43.641],
+				zoom: 17,
 				maxZoom: 18.99,
 				minZoom: 12,
 				extent: [-79.8302,43.3046,-78.9160,44.0295],
@@ -321,11 +334,24 @@
 	function layerSwitch() {
 		if (load > 0) {
 
+			console.log("layer switch");
+
 			map.removeLayer(leftLayer);
 			map.removeLayer(rightLayer);
 
 			var leftSource;
-			if (leftYear !== 1947) {
+			if (leftYear === 1947) {
+				leftSource = new XYZ({
+					url:
+					'https://maps.library.utoronto.ca/tiles1947/{z}/{x}/{y}.png'
+				});
+			} else if (leftYear === 1985) {
+				leftSource = new XYZ({
+					url:
+					'https://maps.library.utoronto.ca/tiles1985/{z}/{x}/{y}.png'
+				});
+			}
+			else {
 				leftSource = new WMTS({
 					url: sources[leftYear]['url'],
 					layer: sources[leftYear]['layer'],
@@ -334,12 +360,6 @@
 					projection: 'EPSG:3857',
 					tileGrid: tileGrid,
 					style: 'default'
-				});
-			} else {
-				console.log("moo");
-				leftSource = new XYZ({
-					url:
-					'https://maps.library.utoronto.ca/tiles1947/{z}/{x}/{y}.png'
 				});
 			}
 
@@ -358,7 +378,19 @@
 			}
 
 			var rightSource;
-			if (rightYear !== 1947) {
+			if (rightYear === 1947) {
+				rightSource = new XYZ({
+					url:
+					'https://maps.library.utoronto.ca/tiles1947/{z}/{x}/{y}.png'
+				});
+			} 
+			else if (rightYear === 1985) {
+				rightSource = new XYZ({
+					url:
+					'https://maps.library.utoronto.ca/tiles1985/{z}/{x}/{y}.png'
+				});
+			}
+			else {
 				rightSource = new WMTS({
 					url: sources[rightYear]['url'],
 					layer: sources[rightYear]['layer'],
@@ -368,12 +400,7 @@
 					tileGrid: tileGrid,
 					style: 'default'
 				});
-			} else {
-				console.log("moo");
-				rightSource = new XYZ({
-					url:
-					'https://maps.library.utoronto.ca/tiles1947/{z}/{x}/{y}.png'
-				});
+				
 			}
 
 			rightLayer = new TileLayer({
@@ -476,7 +503,7 @@
 
 		<Select 
 			items={leftYearSet} 
-			value="1939"
+			value="1985"
 			isSearchable={false}
 			isClearable={false}
 			on:select={handleSelectLeft}
