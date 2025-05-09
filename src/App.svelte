@@ -36,13 +36,14 @@
 	let map = 0;
 	let load = 0;
 
-	let leftYear = 1985; 
+	let leftYear = 1947; 
 	const leftYearSet = [
 		1939, 1947, 1954, 1965, 1978, 
 		1985,
 		2005, 2009, 
 		// 2011, 
-		2018, 2022
+		2012,
+		2018, 2022, 2024
 	];
 	function handleSelectLeft(event) {
 		console.log('selected item', event.detail);
@@ -50,14 +51,14 @@
 	}
 	$: console.log(leftYear);
 
-
-	let rightYear = 2022;
+	let rightYear = 2024;
 	let rightYearSet = [
 		1947, 1954, 1965, 1978, 
 		1985,
 		2005, 2009, 
 		//2011, 
-		2018, 2022
+		2012,
+		2018, 2022, 2024
 	];
 	function handleSelectRight(event) {
 		console.log('selected item', event.detail);
@@ -130,6 +131,13 @@
 		// 	'matrixSet': 'default028mm'
 		// },
 
+		'2012': {
+			'type': 'WMTS',
+			'url': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho_2012_color_5cm/MapServer/WMTS?',
+			'layer': 'cot_ortho_2012_color_5cm',
+			'matrixSet': 'default028mm'
+		},
+
 		'2018': {
 			'type': 'WMTS',
 			'url': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho_2018_color_8cm/MapServer/WMTS?',
@@ -143,6 +151,13 @@
 			'layer': 'basemap_cot_ortho',
 			'matrixSet': 'default028mm'
 		},
+
+		'2024': {
+			'type': 'WMTS',
+			'url': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho_2024_color_8cm/MapServer/WMTS',
+			'layer': 'cot_ortho_2024_color_8cm',
+			'matrixSet': 'default028mm'
+		}
 
 	}
 
@@ -288,8 +303,8 @@
 			layers: [leftLayer, rightLayer, notTorontoLayer, streetLayer],
 			// layers: [leftLayer, missing1939LayerLeft, rightLayer, missing1939LayerRight, notTorontoLayer, streetLayer],
 			view: new View({
-				center: [-79.3859,43.641],
-				zoom: 17,
+				center: [-79.395,43.640],
+				zoom: 16,
 				maxZoom: 18.99,
 				minZoom: 12,
 				extent: [-79.8302,43.3046,-78.9160,44.0295],
@@ -503,7 +518,7 @@
 
 		<Select 
 			items={leftYearSet} 
-			value="1985"
+			value="1947"
 			isSearchable={false}
 			isClearable={false}
 			on:select={handleSelectLeft}
@@ -516,7 +531,7 @@
 
 		<Select 
 			items={rightYearSet} 
-			value="2022"
+			value="2024"
 			isSearchable={false}
 			isClearable={false}
 			on:select={handleSelectRight}
