@@ -26,14 +26,19 @@ Images for all other years are sourced from the [City of Toronto](https://open.t
 
 <!-- - [2011](https://gis.toronto.ca/arcgis/rest/services/primary/cot_ortho_2011_color_10cm_webm/MapServer/WMTS/) -->
 
+- [2012](https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho_2012_color_5cm/MapServer/WMTS)
+
 - [2018](https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho_2018_color_8cm/MapServer/WMTS/)
 
-- [2021](https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho/MapServer/WMTS)
+- [2022](https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho_2022_color_8cm/MapServer/WMTS)
+
+- [2024](https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho_2024_color_8cm/MapServer/WMTS)
+
 
 Labels on the maps are derived from the City of Toronto's [Centerline](https://open.toronto.ca/dataset/toronto-centreline-tcl/) data.
 
 
-## Development
+### Development
 
 ```
 git clone https://github.com/schoolofcities/historical-aerial-imagery-toronto
