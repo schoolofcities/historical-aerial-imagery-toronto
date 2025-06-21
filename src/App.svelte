@@ -23,6 +23,7 @@
 	import GeoJSON from 'ol/format/GeoJSON';
 	import VectorLayer from 'ol/layer/Vector';
 	import VectorSource from 'ol/source/Vector';
+	import { ImageArcGISRest } from 'ol/source';
 
 	import ZoomSlider from 'ol/control/ZoomSlider';
 	import {defaults as defaultControls} from 'ol/control';
@@ -52,7 +53,7 @@
 	$: console.log(leftYear);
 
 	let rightYear = 2024;
-	let rightYearSet = [
+	const rightYearSet = [
 		1947, 1954, 1965, 1978, 
 		1985,
 		2005, 2009, 
@@ -79,87 +80,103 @@
 		resolutions[i] = maxResolution / Math.pow(2, i);
 	}
 
-	const tileGrid = new WMTSTileGrid({
-		origin: [-20037508, 20037508],
-		resolutions: resolutions,
-		matrixIds: matrixIds,
-	});
+	// const tileGrid = new WMTSTileGrid({
+	// 	origin: [-20037508, 20037508],
+	// 	resolutions: resolutions,
+	// 	matrixIds: matrixIds,
+	// });
 
 	const sources = {
-		'1939': {
-			'type': 'WMTS',
-			'url': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_historic_aerial_1939/MapServer/WMTS/',
-			'layer': 'basemap_cot_historic_aerial_1939',
-			'matrixSet': 'default028mm'
-		},
-		'1954': {
-			'type': 'WMTS',
-			'url': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_historic_aerial_1954/MapServer/WMTS/',
-			'layer': 'basemap_cot_historic_aerial_1954',
-			'matrixSet': 'default028mm'
-		},
-		'1965': {
-			'type': 'WMTS',
-			'url': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_historic_aerial_1965/MapServer/WMTS/',
-			'layer': 'basemap_cot_historic_aerial_1965',
-			'matrixSet': 'default028mm'
-		},
-		'1978': {
-			'type': 'WMTS',
-			'url': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_historic_aerial_1978/MapServer/WMTS/',
-			'layer': 'basemap_cot_historic_aerial_1978',
-			'matrixSet': 'default028mm'
-		},
-		'2005': {
-			'type': 'WMTS',
-			'url': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho_2005_color_20cm/MapServer/WMTS/',
-			'layer': 'basemap_cot_ortho_2005_color_20cm',
-			'matrixSet': 'default028mm'
-
-		},
-		'2009': {
-			'type': 'WMTS',
-			'url': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho_2009_color_10cm/MapServer/WMTS?',
-			'layer': 'basemap_cot_ortho_2009_color_10cm',
-			'matrixSet': 'default028mm'
-		},
-
-		// '2011': {
-		// 	'type': 'WMTS',
-		// 	'url': 'https://gis.toronto.ca/arcgis/rest/services/primary/cot_ortho_2011_color_10cm_webm/MapServer/WMTS/',
-		// 	'layer': 'primary_cot_ortho_2011_color_10cm_webm',
-		// 	'matrixSet': 'default028mm'
-		// },
-
-		'2012': {
-			'type': 'WMTS',
-			'url': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho_2012_color_5cm/MapServer/WMTS?',
-			'layer': 'cot_ortho_2012_color_5cm',
-			'matrixSet': 'default028mm'
-		},
-
-		'2018': {
-			'type': 'WMTS',
-			'url': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho_2018_color_8cm/MapServer/WMTS?',
-			'layer': 'basemap_cot_ortho_2018_color_8cm',
-			'matrixSet': 'default028mm'
-		},
-		
-		'2022': {
-			'type': 'WMTS',
-			'url': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho_2022_color_8cm/MapServer/WMTS',
-			'layer': 'basemap_cot_ortho',
-			'matrixSet': 'default028mm'
-		},
-
-		'2024': {
-			'type': 'WMTS',
-			'url': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho_2024_color_8cm/MapServer/WMTS',
-			'layer': 'cot_ortho_2024_color_8cm',
-			'matrixSet': 'default028mm'
-		}
-
+		'1939': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_historic_aerial_1939/MapServer/tile/{z}/{y}/{x}',
+		'1947': 'https://maps.library.utoronto.ca/tiles1947/{z}/{x}/{y}.png',
+		'1954': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_historic_aerial_1954/MapServer/tile/{z}/{y}/{x}',
+		'1965': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_historic_aerial_1965/MapServer/tile/{z}/{y}/{x}',
+		'1978': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_historic_aerial_1978/MapServer/tile/{z}/{y}/{x}',
+		'1985': 'https://maps.library.utoronto.ca/tiles1985/{z}/{x}/{y}.png',
+		'2005': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho_2005_color_20cm/MapServer/tile/{z}/{y}/{x}',
+		'2009': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho_2009_color_10cm/MapServer/tile/{z}/{y}/{x}',
+		'2011': 'https://gis.toronto.ca/arcgis/rest/services/primary/cot_ortho_2011_color_10cm_webm/MapServer/tile/{z}/{y}/{x}',
+		'2012': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho_2012_color_5cm/MapServer/tile/{z}/{y}/{x}',
+		'2018': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho_2018_color_8cm/MapServer/tile/{z}/{y}/{x}',
+		'2022': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho_2022_color_8cm/MapServer/tile/{z}/{y}/{x}',
+		'2024': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho_2024_color_8cm/MapServer/tile/{z}/{y}/{x}'
 	}
+
+	// const sources = {
+	// 	'1939': {
+	// 		'type': 'WMTS',
+	// 		'url': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_historic_aerial_1939/MapServer/WMTS/',
+	// 		'layer': 'basemap_cot_historic_aerial_1939',
+	// 		'matrixSet': 'default028mm'
+	// 	},
+	// 	'1954': {
+	// 		'type': 'WMTS',
+	// 		'url': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_historic_aerial_1954/MapServer/WMTS/',
+	// 		'layer': 'basemap_cot_historic_aerial_1954',
+	// 		'matrixSet': 'default028mm'
+	// 	},
+	// 	'1965': {
+	// 		'type': 'WMTS',
+	// 		'url': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_historic_aerial_1965/MapServer/WMTS/',
+	// 		'layer': 'basemap_cot_historic_aerial_1965',
+	// 		'matrixSet': 'default028mm'
+	// 	},
+	// 	'1978': {
+	// 		'type': 'WMTS',
+	// 		'url': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_historic_aerial_1978/MapServer/WMTS/',
+	// 		'layer': 'basemap_cot_historic_aerial_1978',
+	// 		'matrixSet': 'default028mm'
+	// 	},
+	// 	'2005': {
+	// 		'type': 'WMTS',
+	// 		'url': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho_2005_color_20cm/MapServer/WMTS/',
+	// 		'layer': 'basemap_cot_ortho_2005_color_20cm',
+	// 		'matrixSet': 'default028mm'
+
+	// 	},
+	// 	'2009': {
+	// 		'type': 'WMTS',
+	// 		'url': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho_2009_color_10cm/MapServer/WMTS?',
+	// 		'layer': 'basemap_cot_ortho_2009_color_10cm',
+	// 		'matrixSet': 'default028mm'
+	// 	},
+
+	// 	'2011': {
+	// 		'type': 'WMTS',
+	// 		'url': 'https://gis.toronto.ca/arcgis/rest/services/primary/cot_ortho_2011_color_10cm_webm/MapServer/WMTS/',
+	// 		'layer': 'primary_cot_ortho_2011_color_10cm_webm',
+	// 		'matrixSet': 'default028mm'
+	// 	},
+
+	// 	'2012': {
+	// 		'type': 'WMTS',
+	// 		'url': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho_2012_color_5cm/MapServer/WMTS?',
+	// 		'layer': 'cot_ortho_2012_color_5cm',
+	// 		'matrixSet': 'default028mm'
+	// 	},
+
+	// 	'2018': {
+	// 		'type': 'WMTS',
+	// 		'url': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho_2018_color_8cm/MapServer/WMTS?',
+	// 		'layer': 'basemap_cot_ortho_2018_color_8cm',
+	// 		'matrixSet': 'default028mm'
+	// 	},
+		
+	// 	'2022': {
+	// 		'type': 'WMTS',
+	// 		'url': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho_2022_color_8cm/MapServer/WMTS',
+	// 		'layer': 'basemap_cot_ortho',
+	// 		'matrixSet': 'default028mm'
+	// 	},
+
+	// 	'2024': {
+	// 		'type': 'WMTS',
+	// 		'url': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho_2024_color_8cm/MapServer/WMTS',
+	// 		'layer': 'cot_ortho_2024_color_8cm',
+	// 		'matrixSet': 'default028mm'
+	// 	}
+
+	// }
 
 	var features = new GeoJSON().readFeatures(notToronto, {
 		});
@@ -189,12 +206,12 @@
 	});
 	const missingStyleLeft = new Style({
 		fill: new Fill({
-			color: '#fcfcfc',
+			color: '#e3e3e3',
 		})
 	});
 	const missingStyleRight = new Style({
 		fill: new Fill({
-			color: '#fcfcfc',
+			color: '#e3e3e3',
 		})
 	});
 	var missing1939LayerLeft = new VectorLayer({
@@ -252,46 +269,24 @@
 	}
 
 
-	var leftSource;
-	if (leftYear === 1947) {
-		leftSource = new XYZ({
-			url:
-			'https://maps.library.utoronto.ca/tiles1947/{z}/{x}/{y}.png'
-		});
-	} else if (leftYear === 1985) {
-		leftSource = new XYZ({
-			url:
-			'https://maps.library.utoronto.ca/tiles1985/{z}/{x}/{y}.png'
-		});
-	}
-	else {
-		leftSource = new WMTS({
-			url: sources[leftYear]['url'],
-			layer: sources[leftYear]['layer'],
-			matrixSet: sources[leftYear]['matrixSet'],
-			format: 'image/jpg',
-			projection: 'EPSG:3857',
-			tileGrid: tileGrid,
-			style: 'default'
-		});
-	}
+	var leftSource = new XYZ({
+		url:
+		sources[leftYear]
+	});
 
 	var leftLayer = new TileLayer({
 			opacity: 1,
 			source: leftSource
 		});
 
+	var rightSource = new XYZ({
+		url:
+		sources[rightYear]
+	});
+
 	var rightLayer = new TileLayer({
 		opacity: 1,
-		source: new WMTS({
-			url: sources[rightYear]['url'],
-			layer: sources[rightYear]['layer'],
-			matrixSet: sources[rightYear]['matrixSet'],
-			format: 'image/jpg',
-			projection: 'EPSG:3857',
-			tileGrid: tileGrid,
-			style: 'default'
-		})
+		source: rightSource
 	});
 
 	onMount(() => {
@@ -354,34 +349,45 @@
 			map.removeLayer(leftLayer);
 			map.removeLayer(rightLayer);
 
-			var leftSource;
-			if (leftYear === 1947) {
-				leftSource = new XYZ({
-					url:
-					'https://maps.library.utoronto.ca/tiles1947/{z}/{x}/{y}.png'
-				});
-			} else if (leftYear === 1985) {
-				leftSource = new XYZ({
-					url:
-					'https://maps.library.utoronto.ca/tiles1985/{z}/{x}/{y}.png'
-				});
-			}
-			else {
-				leftSource = new WMTS({
-					url: sources[leftYear]['url'],
-					layer: sources[leftYear]['layer'],
-					matrixSet: sources[leftYear]['matrixSet'],
-					format: 'image/jpg',
-					projection: 'EPSG:3857',
-					tileGrid: tileGrid,
-					style: 'default'
-				});
-			}
+			// var leftSource;
+			// if (leftYear === 1947) {
+			// 	leftSource = new XYZ({
+			// 		url:
+			// 		'https://maps.library.utoronto.ca/tiles1947/{z}/{x}/{y}.png'
+			// 	});
+			// } else if (leftYear === 1985) {
+			// 	leftSource = new XYZ({
+			// 		url:
+			// 		'https://maps.library.utoronto.ca/tiles1985/{z}/{x}/{y}.png'
+			// 	});
+			// }
+			// else {
+			// 	leftSource = new WMTS({
+			// 		url: sources[leftYear]['url'],
+			// 		layer: sources[leftYear]['layer'],
+			// 		matrixSet: sources[leftYear]['matrixSet'],
+			// 		format: 'image/jpg',
+			// 		projection: 'EPSG:3857',
+			// 		tileGrid: tileGrid,
+			// 		style: 'default'
+			// 	});
+			// }
+
+			// leftLayer = new TileLayer({
+			// 	opacity: 1,
+			// 	source: leftSource
+			// });
+
+			leftSource = new XYZ({
+				url:
+				sources[leftYear]
+			});
 
 			leftLayer = new TileLayer({
-				opacity: 1,
-				source: leftSource
-			});
+					opacity: 1,
+					source: leftSource
+				});
+
 			map.addLayer(leftLayer);
 
 			map.removeLayer(missing1939LayerLeft);
@@ -392,36 +398,52 @@
 				missing1939LayerLeft.setOpacity(0);
 			}
 
-			var rightSource;
-			if (rightYear === 1947) {
-				rightSource = new XYZ({
-					url:
-					'https://maps.library.utoronto.ca/tiles1947/{z}/{x}/{y}.png'
-				});
-			} 
-			else if (rightYear === 1985) {
-				rightSource = new XYZ({
-					url:
-					'https://maps.library.utoronto.ca/tiles1985/{z}/{x}/{y}.png'
-				});
-			}
-			else {
-				rightSource = new WMTS({
-					url: sources[rightYear]['url'],
-					layer: sources[rightYear]['layer'],
-					matrixSet: sources[rightYear]['matrixSet'],
-					format: 'image/jpg',
-					projection: 'EPSG:3857',
-					tileGrid: tileGrid,
-					style: 'default'
-				});
+			// var rightSource;
+			// if (rightYear === 1947) {
+			// 	rightSource = new XYZ({
+			// 		url:
+			// 		'https://maps.library.utoronto.ca/tiles1947/{z}/{x}/{y}.png'
+			// 	});
+			// } 
+			// else if (rightYear === 1985) {
+			// 	rightSource = new XYZ({
+			// 		url:
+			// 		'https://maps.library.utoronto.ca/tiles1985/{z}/{x}/{y}.png'
+			// 	});
+			// } else if (rightYear === 2022) {
+			// 	rightSource = new XYZ({
+			// 		url:
+			// 		'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho/MapServer/tile/{z}/{y}/{x}'
+			// 	});
+			// }
+			// else {
+			// 	rightSource = new WMTS({
+			// 		url: sources[rightYear]['url'],
+			// 		layer: sources[rightYear]['layer'],
+			// 		matrixSet: sources[rightYear]['matrixSet'],
+			// 		format: 'image/jpg',
+			// 		projection: 'EPSG:3857',
+			// 		tileGrid: tileGrid,
+			// 		style: 'default'
+			// 	});
 				
-			}
+			// }
 
-			rightLayer = new TileLayer({
+			// rightLayer = new TileLayer({
+			// 	opacity: 1,
+			// 	source: rightSource
+			// });
+
+			var rightSource = new XYZ({
+				url:
+				sources[rightYear]
+			});
+
+			var rightLayer = new TileLayer({
 				opacity: 1,
 				source: rightSource
 			});
+
 			map.addLayer(rightLayer);
 
 			rightLayer.on('prerender', function (event) {
