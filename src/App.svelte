@@ -23,7 +23,6 @@
 	import GeoJSON from 'ol/format/GeoJSON';
 	import VectorLayer from 'ol/layer/Vector';
 	import VectorSource from 'ol/source/Vector';
-	import { ImageArcGISRest } from 'ol/source';
 
 	import ZoomSlider from 'ol/control/ZoomSlider';
 	import {defaults as defaultControls} from 'ol/control';
@@ -66,8 +65,6 @@
 		rightYear = event.detail.value
 	}
 
-
-
 	useGeographic();
 
 	const resolutions = [];
@@ -101,82 +98,6 @@
 		'2022': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho_2022_color_8cm/MapServer/tile/{z}/{y}/{x}',
 		'2024': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho_2024_color_8cm/MapServer/tile/{z}/{y}/{x}'
 	}
-
-	// const sources = {
-	// 	'1939': {
-	// 		'type': 'WMTS',
-	// 		'url': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_historic_aerial_1939/MapServer/WMTS/',
-	// 		'layer': 'basemap_cot_historic_aerial_1939',
-	// 		'matrixSet': 'default028mm'
-	// 	},
-	// 	'1954': {
-	// 		'type': 'WMTS',
-	// 		'url': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_historic_aerial_1954/MapServer/WMTS/',
-	// 		'layer': 'basemap_cot_historic_aerial_1954',
-	// 		'matrixSet': 'default028mm'
-	// 	},
-	// 	'1965': {
-	// 		'type': 'WMTS',
-	// 		'url': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_historic_aerial_1965/MapServer/WMTS/',
-	// 		'layer': 'basemap_cot_historic_aerial_1965',
-	// 		'matrixSet': 'default028mm'
-	// 	},
-	// 	'1978': {
-	// 		'type': 'WMTS',
-	// 		'url': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_historic_aerial_1978/MapServer/WMTS/',
-	// 		'layer': 'basemap_cot_historic_aerial_1978',
-	// 		'matrixSet': 'default028mm'
-	// 	},
-	// 	'2005': {
-	// 		'type': 'WMTS',
-	// 		'url': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho_2005_color_20cm/MapServer/WMTS/',
-	// 		'layer': 'basemap_cot_ortho_2005_color_20cm',
-	// 		'matrixSet': 'default028mm'
-
-	// 	},
-	// 	'2009': {
-	// 		'type': 'WMTS',
-	// 		'url': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho_2009_color_10cm/MapServer/WMTS?',
-	// 		'layer': 'basemap_cot_ortho_2009_color_10cm',
-	// 		'matrixSet': 'default028mm'
-	// 	},
-
-	// 	'2011': {
-	// 		'type': 'WMTS',
-	// 		'url': 'https://gis.toronto.ca/arcgis/rest/services/primary/cot_ortho_2011_color_10cm_webm/MapServer/WMTS/',
-	// 		'layer': 'primary_cot_ortho_2011_color_10cm_webm',
-	// 		'matrixSet': 'default028mm'
-	// 	},
-
-	// 	'2012': {
-	// 		'type': 'WMTS',
-	// 		'url': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho_2012_color_5cm/MapServer/WMTS?',
-	// 		'layer': 'cot_ortho_2012_color_5cm',
-	// 		'matrixSet': 'default028mm'
-	// 	},
-
-	// 	'2018': {
-	// 		'type': 'WMTS',
-	// 		'url': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho_2018_color_8cm/MapServer/WMTS?',
-	// 		'layer': 'basemap_cot_ortho_2018_color_8cm',
-	// 		'matrixSet': 'default028mm'
-	// 	},
-		
-	// 	'2022': {
-	// 		'type': 'WMTS',
-	// 		'url': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho_2022_color_8cm/MapServer/WMTS',
-	// 		'layer': 'basemap_cot_ortho',
-	// 		'matrixSet': 'default028mm'
-	// 	},
-
-	// 	'2024': {
-	// 		'type': 'WMTS',
-	// 		'url': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho_2024_color_8cm/MapServer/WMTS',
-	// 		'layer': 'cot_ortho_2024_color_8cm',
-	// 		'matrixSet': 'default028mm'
-	// 	}
-
-	// }
 
 	var features = new GeoJSON().readFeatures(notToronto, {
 		});
@@ -349,35 +270,6 @@
 			map.removeLayer(leftLayer);
 			map.removeLayer(rightLayer);
 
-			// var leftSource;
-			// if (leftYear === 1947) {
-			// 	leftSource = new XYZ({
-			// 		url:
-			// 		'https://maps.library.utoronto.ca/tiles1947/{z}/{x}/{y}.png'
-			// 	});
-			// } else if (leftYear === 1985) {
-			// 	leftSource = new XYZ({
-			// 		url:
-			// 		'https://maps.library.utoronto.ca/tiles1985/{z}/{x}/{y}.png'
-			// 	});
-			// }
-			// else {
-			// 	leftSource = new WMTS({
-			// 		url: sources[leftYear]['url'],
-			// 		layer: sources[leftYear]['layer'],
-			// 		matrixSet: sources[leftYear]['matrixSet'],
-			// 		format: 'image/jpg',
-			// 		projection: 'EPSG:3857',
-			// 		tileGrid: tileGrid,
-			// 		style: 'default'
-			// 	});
-			// }
-
-			// leftLayer = new TileLayer({
-			// 	opacity: 1,
-			// 	source: leftSource
-			// });
-
 			leftSource = new XYZ({
 				url:
 				sources[leftYear]
@@ -397,42 +289,6 @@
 			} else {
 				missing1939LayerLeft.setOpacity(0);
 			}
-
-			// var rightSource;
-			// if (rightYear === 1947) {
-			// 	rightSource = new XYZ({
-			// 		url:
-			// 		'https://maps.library.utoronto.ca/tiles1947/{z}/{x}/{y}.png'
-			// 	});
-			// } 
-			// else if (rightYear === 1985) {
-			// 	rightSource = new XYZ({
-			// 		url:
-			// 		'https://maps.library.utoronto.ca/tiles1985/{z}/{x}/{y}.png'
-			// 	});
-			// } else if (rightYear === 2022) {
-			// 	rightSource = new XYZ({
-			// 		url:
-			// 		'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho/MapServer/tile/{z}/{y}/{x}'
-			// 	});
-			// }
-			// else {
-			// 	rightSource = new WMTS({
-			// 		url: sources[rightYear]['url'],
-			// 		layer: sources[rightYear]['layer'],
-			// 		matrixSet: sources[rightYear]['matrixSet'],
-			// 		format: 'image/jpg',
-			// 		projection: 'EPSG:3857',
-			// 		tileGrid: tileGrid,
-			// 		style: 'default'
-			// 	});
-				
-			// }
-
-			// rightLayer = new TileLayer({
-			// 	opacity: 1,
-			// 	source: rightSource
-			// });
 
 			var rightSource = new XYZ({
 				url:
@@ -470,14 +326,6 @@
 				ctx.restore();
 			});
 
-			// map.removeLayer(missing1939LayerRight);
-			// map.addLayer(missing1939LayerRight);
-			// if (rightYear === 1939) {
-			// 	missing1939LayerRight.setOpacity(1);
-			// } else {
-			// 	missing1939LayerRight.setOpacity(0);
-			// }
-
 			map.removeLayer(notTorontoLayer);
 			map.addLayer(notTorontoLayer);
 			
@@ -489,8 +337,6 @@
 
 	$: lineLeft = parseInt(pageWidth * (lineBreak / 100) -2 );
 
-
-	
 </script>
 
 
@@ -501,8 +347,6 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
 	<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 </svelte:head>
-
-
 
 
 
@@ -566,8 +410,6 @@
 
 
 
-
-
 <style>
 
 	/* @import "../node_modules/ol/ol.css"; */
@@ -613,6 +455,7 @@
 		display: flex;
 		justify-content: center;
 	}
+
 	#label-bar {
 		opacity: 0.95;
 		position: absolute;
@@ -628,6 +471,7 @@
 		padding-right: 2px;
 		z-index: 99;
 	}
+
 	#label-bar p {
 		margin: 3px;
 		margin-left: 4px;
@@ -637,12 +481,14 @@
 		line-height: 14px;
 		color: #5a5a5a
 	}
+
 	input[type=checkbox] {
 		padding: 0px;
 		margin: 0px;
 		width: 11px;
         height: 11px;
 	}
+
 	input[type=checkbox]:hover {
 		cursor: pointer;
 	}
@@ -718,8 +564,6 @@
 		-webkit-appearance: none; 
 	}
 
-	
-
 	input[type=range]:focus {
 		outline: none;
 		}
@@ -727,11 +571,10 @@
 	input[type=range]::-ms-track {
 		width: 100%;
 		cursor: pointer;
-		/* Hides the slider so custom styles can be added */
 		background: transparent; 
 		border-color: transparent;
 		color: transparent;
-		}
+	}
 
 	input[type=range]::-webkit-slider-thumb {
 		-webkit-appearance: none;
@@ -754,7 +597,6 @@
 		background-color: #F1C500;
 	}
 
-
 	input[type="range"]::-moz-range-thumb {
 		pointer-events:auto;
 		overflow: hidden;
@@ -766,6 +608,7 @@
 		cursor: grab;
 		background-image: url('./assets/arrows.png');
 	}
+
 	input[type="range"]::-moz-range-thumb:hover {
 		background-color: #F1C500;
 	}
