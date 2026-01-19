@@ -8,9 +8,9 @@ https://schoolofcities.github.io/historical-aerial-imagery-toronto/
 
 Imagery for [1947](https://mdl.library.utoronto.ca/collections/geospatial-data/toronto-aerial-photographs-1947-black-and-white-and-colourized) comes from the University of Toronto's Map and Data Library. We additionally processed these by clipping and combining them into a single raster tile package.
 
-Imagery for [1985](https://mdl.library.utoronto.ca/collections/geospatial-data/toronto-aerial-photographs-1947-black-and-white-and-colourized) comes from the University of Toronto's Map and Data Library. We additionally processed these by combining them into a single raster tile package. The same imagery is also available as open data via [Ontario GeoHub](https://geohub.lio.gov.on.ca/documents/05abf73ee4c84b8088e953c2a3cbc93f/about)
-
 Imagery for [1985](https://www.toronto.ca/city-government/accountability-operations-customer-service/access-city-information-or-records/city-of-toronto-archives/whats-online/maps/aerial-photographs/aerial-photographs-1985/) comes from the City of Toronto Archives. We additionally processed these images by clipping and geo-referencing them, and then combing them into a single raster tile package.
+
+Imagery for [1995](https://mdl.library.utoronto.ca/collections/air-photos/greater-toronto-and-golden-horseshoe-colour-digital-orthophotos) comes from the University of Toronto's Map and Data Library. We additionally processed these by combining them into a single raster tile package. The same imagery is also available as open data via [Ontario GeoHub](https://geohub.lio.gov.on.ca/documents/05abf73ee4c84b8088e953c2a3cbc93f/about)
 
 Images for all other years are sourced from the [City of Toronto](https://open.toronto.ca/dataset/web-map-services/). These are shared as WMTS (Web Map Tiled Services). Note that for 1939 we blacked-out a significant portion of the imagery that was not geo-referenced properly.
 
