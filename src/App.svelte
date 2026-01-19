@@ -39,11 +39,11 @@
 	let leftYear = 1947; 
 	const leftYearSet = [
 		1939, 1947, 1954, 1965, 1978, 
-		1985,
+		1985, 1995, 1999,
 		2005, 2009, 
 		// 2011, 
 		2012,
-		2018, 2022, 2024
+		2018, 2020, 2022, 2024
 	];
 	function handleSelectLeft(event) {
 		console.log('selected item', event.detail);
@@ -54,11 +54,11 @@
 	let rightYear = 2024;
 	const rightYearSet = [
 		1947, 1954, 1965, 1978, 
-		1985,
+		1985, 1995, 1999,
 		2005, 2009, 
 		//2011, 
 		2012,
-		2018, 2022, 2024
+		2018, 2020, 2022, 2024
 	];
 	function handleSelectRight(event) {
 		console.log('selected item', event.detail);
@@ -90,11 +90,14 @@
 		'1965': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_historic_aerial_1965/MapServer/tile/{z}/{y}/{x}',
 		'1978': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_historic_aerial_1978/MapServer/tile/{z}/{y}/{x}',
 		'1985': 'https://maps.library.utoronto.ca/tiles1985/{z}/{x}/{y}.png',
+		'1995': 'https://maps.library.utoronto.ca/tiles1995/{z}/{x}/{y}.png',
+		'1999': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho_1999_greyscale_15cm/MapServer/tile/{z}/{y}/{x}',
 		'2005': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho_2005_color_20cm/MapServer/tile/{z}/{y}/{x}',
 		'2009': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho_2009_color_10cm/MapServer/tile/{z}/{y}/{x}',
 		'2011': 'https://gis.toronto.ca/arcgis/rest/services/primary/cot_ortho_2011_color_10cm_webm/MapServer/tile/{z}/{y}/{x}',
 		'2012': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho_2012_color_5cm/MapServer/tile/{z}/{y}/{x}',
 		'2018': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho_2018_color_8cm/MapServer/tile/{z}/{y}/{x}',
+		'2020': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_2020_NightTimeLight_20cm/MapServer/tile/{z}/{y}/{x}',
 		'2022': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho_2022_color_8cm/MapServer/tile/{z}/{y}/{x}',
 		'2024': 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho_2024_color_8cm/MapServer/tile/{z}/{y}/{x}'
 	}
