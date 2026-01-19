@@ -22,7 +22,7 @@ Images for all other years are sourced from the [City of Toronto](https://open.t
 
 - [1978](https://gis.toronto.ca/arcgis/rest/services/basemap/cot_historic_aerial_1978/MapServer/WMTS/)
 
-- [1999](https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho_1999_greyscale_15cm (MapServer)/MapServer/WMTS/)
+- [1999](https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho_1999_greyscale_15cm/MapServer)
 
 - [2005](https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho_2005_color_20cm/MapServer/WMTS/)
 
