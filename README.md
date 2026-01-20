@@ -51,4 +51,3 @@ cd historical-aerial-imagery-toronto
 npm install
 npm run dev
 ```
-
