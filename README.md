@@ -1,10 +1,13 @@
 ## historical-aerial-imagery-toronto
 
-A simple web app for comparing historical aerial imagery (i.e. air photos) in the City of Toronto. Built for teaching and research purposes at the School of Cities, but made openly available for anyone interested in Toronto history.
+A simple web page for comparing historical aerial imagery (i.e. air photos) in the City of Toronto. Built for teaching and research purposes at the School of Cities, but made openly available for anyone interested in Toronto history.
 
 https://schoolofcities.github.io/historical-aerial-imagery-toronto/
 
-### Data Sources:
+For more details on this project, check out a [blog post](https://mdl.library.utoronto.ca/mdl-blog/creating-webpage-viewing-historical-aerial-imagery-toronto) about this project written for the University of Toronto Map & Data Library.
+
+
+### Data sources:
 
 Imagery for [1947](https://mdl.library.utoronto.ca/collections/geospatial-data/toronto-aerial-photographs-1947-black-and-white-and-colourized) comes from the University of Toronto's Map and Data Library. We additionally processed these by clipping and combining them into a single raster tile package.
 
