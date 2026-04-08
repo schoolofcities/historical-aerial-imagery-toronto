@@ -43,6 +43,8 @@ Images for all other years are sourced from the [City of Toronto](https://open.t
 
 - [2024](https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho_2024_color_8cm/MapServer)
 
+- [2024](https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho_2025_color_8cm/MapServer)
+
 Labels on the maps are derived from the City of Toronto's [Centerline](https://open.toronto.ca/dataset/toronto-centreline-tcl/) data.
 
 

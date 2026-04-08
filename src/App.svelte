@@ -57,14 +57,14 @@
 		1939, 1947, 1954, 1965, 1978,
 		1985, 1995, 1999,
 		2005, 2009,
-		2012, 2018, 2020, 2022, 2024
+		2012, 2018, 2020, 2022, 2024, 2025
 	];
 
 	const rightYearSet = [
 		1947, 1954, 1965, 1978,
 		1985, 1995, 1999,
 		2005, 2009,
-		2012, 2018, 2020, 2022, 2024
+		2012, 2018, 2020, 2022, 2024, 2025
 	];
 
 	function handleSelectLeft(e) {
@@ -96,7 +96,8 @@
 		2018: 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho_2018_color_8cm/MapServer/tile/{z}/{y}/{x}',
 		2020: 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_2020_NightTimeLight_20cm/MapServer/tile/{z}/{y}/{x}',
 		2022: 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho_2022_color_8cm/MapServer/tile/{z}/{y}/{x}',
-		2024: 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho_2024_color_8cm/MapServer/tile/{z}/{y}/{x}'
+		2024: 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho_2024_color_8cm/MapServer/tile/{z}/{y}/{x}',
+		2025: 'https://gis.toronto.ca/arcgis/rest/services/basemap/cot_ortho_2025_color_8cm/MapServer/tile/{z}/{y}/{x}'
 	};
 
 	/* ------------------
@@ -213,7 +214,7 @@
 				center: [-79.395, 43.64],
 				zoom: 16,
 				minZoom: 12,
-				maxZoom: 18.99,
+				maxZoom: 19.99,
 				extent: [-79.8302, 43.3046, -78.9160, 44.0295]
 			}),
 			controls: defaultControls().extend([new ZoomSlider()])
