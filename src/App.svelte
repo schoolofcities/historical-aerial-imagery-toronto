@@ -309,7 +309,7 @@
 
 		<Select 
 			items={rightYearSet} 
-			value="2024"
+			value="2025"
 			isSearchable={false}
 			isClearable={false}
 			on:select={handleSelectRight}
