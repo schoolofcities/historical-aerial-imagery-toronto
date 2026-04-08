@@ -51,7 +51,7 @@
 	let lineLeft = 0;
 
 	let leftYear = 1947;
-	let rightYear = 2024;
+	let rightYear = 2025;
 
 	const leftYearSet = [
 		1939, 1947, 1954, 1965, 1978,
